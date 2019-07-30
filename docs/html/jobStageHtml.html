@@ -1,0 +1,3400 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-type"/>
+    <link href="/proxy/application_1557228347474_0004/static/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/proxy/application_1557228347474_0004/static/vis.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/proxy/application_1557228347474_0004/static/webui.css" rel="stylesheet" type="text/css"/>
+    <link href="/proxy/application_1557228347474_0004/static/timeline-view.css" rel="stylesheet" type="text/css"/>
+    <script src="/proxy/application_1557228347474_0004/static/sorttable.js"></script>
+    <script src="/proxy/application_1557228347474_0004/static/jquery-1.11.1.min.js"></script>
+    <script src="/proxy/application_1557228347474_0004/static/vis.min.js"></script>
+    <script src="/proxy/application_1557228347474_0004/static/bootstrap-tooltip.js"></script>
+    <script src="/proxy/application_1557228347474_0004/static/initialize-tooltips.js"></script>
+    <script src="/proxy/application_1557228347474_0004/static/table.js"></script>
+    <script src="/proxy/application_1557228347474_0004/static/additional-metrics.js"></script>
+    <script src="/proxy/application_1557228347474_0004/static/timeline-view.js"></script>
+    <script src="/proxy/application_1557228347474_0004/static/log-view.js"></script>
+    <script src="/proxy/application_1557228347474_0004/static/webui.js"></script>
+    <script>setUIRoot('/proxy/application_1557228347474_0004')</script>
+    <link href="/proxy/application_1557228347474_0004/static/spark-dag-viz.css" rel="stylesheet" type="text/css"/>
+    <script src="/proxy/application_1557228347474_0004/static/d3.min.js"></script>
+    <script src="/proxy/application_1557228347474_0004/static/dagre-d3.min.js"></script>
+    <script src="/proxy/application_1557228347474_0004/static/graphlib-dot.min.js"></script>
+    <script src="/proxy/application_1557228347474_0004/static/spark-dag-viz.js"></script>
+    <title>StatApplyDetail - Details for Job 1</title>
+</head>
+<body>
+<div class="navbar navbar-static-top">
+    <div class="navbar-inner">
+        <div class="brand">
+            <a class="brand" href="/proxy/application_1557228347474_0004/">
+                <img src="/proxy/application_1557228347474_0004/static/spark-logo-77x50px-hd.png"/>
+                <span class="version">2.2.0</span>
+            </a>
+        </div>
+        <p class="navbar-text pull-right">
+            <strong title="StatApplyDetail">StatApplyDetail</strong> application UI
+        </p>
+        <ul class="nav">
+            <li class="active">
+                <a href="/proxy/application_1557228347474_0004/jobs/">Jobs</a>
+            </li>
+            <li class="">
+                <a href="/proxy/application_1557228347474_0004/stages/">Stages</a>
+            </li>
+            <li class="">
+                <a href="/proxy/application_1557228347474_0004/storage/">Storage</a>
+            </li>
+            <li class="">
+                <a href="/proxy/application_1557228347474_0004/environment/">Environment</a>
+            </li>
+            <li class="">
+                <a href="/proxy/application_1557228347474_0004/executors/">Executors</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 style="vertical-align: bottom; display: inline-block;">
+                Details for Job 1
+
+            </h3>
+        </div>
+    </div>
+    <div>
+        <ul class="unstyled">
+            <li>
+                <strong>Status:</strong>
+                RUNNING
+            </li>
+            <li>
+                <a href="#active"><strong>Active Stages:</strong></a>
+                1
+            </li>
+            <li>
+                <a href="#pending">
+                    <strong>Pending Stages:</strong>
+                </a>4
+            </li>
+            <li>
+                <a href="#completed"><strong>Completed Stages:</strong></a>
+                24
+            </li>
+        </ul>
+    </div>
+    <span class="expand-job-timeline">
+<span class="expand-job-timeline-arrow arrow-closed"></span>
+<a data-placement="right" data-toggle="tooltip" title="Shows when stages started and ended and when executors joined or left. Drag to scroll.
+       Click Enable Zooming and use mouse wheel to zoom in/out.">
+        Event Timeline
+      </a>
+</span>
+    <div class="collapsed" id="job-timeline">
+        <div class="control-panel">
+            <div id="job-timeline-zoom-lock">
+                <input type="checkbox"/>
+                <span>Enable zooming</span>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        drawJobTimeline(
+            [
+                {
+                    'id': 'executors',
+                    'content': '<div>Executors</div><div class="legend-area"><svg width="150px" height="55px">      <rect class="executor-added-legend" x="5px" y="5px" width="20px" height="15px" rx="2px" ry="2px"></rect>      <text x="35px" y="17px">Added</text>      <rect class="executor-removed-legend" x="5px" y="30px" width="20px" height="15px" rx="2px" ry="2px"></rect>      <text x="35px" y="42px">Removed</text>    </svg></div>',
+                },
+                {
+                    'id': 'stages',
+                    'content': '<div>Stages</div><div class="legend-area"><svg width="150px" height="85px">      <rect class="completed-stage-legend" x="5px" y="5px" width="20px" height="15px" rx="2px" ry="2px"></rect>      <text x="35px" y="17px">Completed</text>      <rect class="failed-stage-legend" x="5px" y="30px" width="20px" height="15px" rx="2px" ry="2px"></rect>      <text x="35px" y="42px">Failed</text>      <rect class="active-stage-legend" x="5px" y="55px" width="20px" height="15px" rx="2px" ry="2px"></rect>      <text x="35px" y="67px">Active</text>    </svg></div>',
+                }
+            ]
+            , [
+                {
+                    'className': 'stage job-timeline-object running',
+                    'group': 'stages',
+                    'start': new Date(1557232008991),
+                    'end': new Date(1557232064453),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="filter at StatApplyDetailService.scala:336 (Stage 22.0)<br>' +
+                        'Status: RUNNING<br>' +
+                        'Submitted: 2019/05/07 20:26:48' +
+                        '">' +
+                        'filter at StatApplyDetailService.scala:336 (Stage 22.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231599018),
+                    'end': new Date(1557231664220),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailDao.scala:101 (Stage 9.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:59' +
+                        '<br>Completed: 2019/05/07 20:21:04">' +
+                        'mapPartitions at StatApplyDetailDao.scala:101 (Stage 9.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231598955),
+                    'end': new Date(1557231632596),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailDao.scala:206 (Stage 1.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:58' +
+                        '<br>Completed: 2019/05/07 20:20:32">' +
+                        'mapPartitions at StatApplyDetailDao.scala:206 (Stage 1.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231598969),
+                    'end': new Date(1557231602185),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="sortBy at StatApplyDetailService.scala:205 (Stage 2.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:58' +
+                        '<br>Completed: 2019/05/07 20:20:02">' +
+                        'sortBy at StatApplyDetailService.scala:205 (Stage 2.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231602243),
+                    'end': new Date(1557231608974),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="groupBy at StatApplyDetailService.scala:209 (Stage 3.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:20:02' +
+                        '<br>Completed: 2019/05/07 20:20:08">' +
+                        'groupBy at StatApplyDetailService.scala:209 (Stage 3.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231599177),
+                    'end': new Date(1557231697748),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailDao.scala:231 (Stage 25.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:59' +
+                        '<br>Completed: 2019/05/07 20:21:37">' +
+                        'mapPartitions at StatApplyDetailDao.scala:231 (Stage 25.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231609027),
+                    'end': new Date(1557231616887),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailService.scala:211 (Stage 4.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:20:09' +
+                        '<br>Completed: 2019/05/07 20:20:16">' +
+                        'mapPartitions at StatApplyDetailService.scala:211 (Stage 4.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231599137),
+                    'end': new Date(1557231715094),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailDao.scala:192 (Stage 19.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:59' +
+                        '<br>Completed: 2019/05/07 20:21:55">' +
+                        'mapPartitions at StatApplyDetailDao.scala:192 (Stage 19.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231599146),
+                    'end': new Date(1557231697045),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailDao.scala:173 (Stage 20.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:59' +
+                        '<br>Completed: 2019/05/07 20:21:37">' +
+                        'mapPartitions at StatApplyDetailDao.scala:173 (Stage 20.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231934022),
+                    'end': new Date(1557232008972),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="filter at StatApplyDetailService.scala:290 (Stage 21.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:25:34' +
+                        '<br>Completed: 2019/05/07 20:26:48">' +
+                        'filter at StatApplyDetailService.scala:290 (Stage 21.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231729620),
+                    'end': new Date(1557231781973),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="union at StatApplyDetailService.scala:136 (Stage 14.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:22:09' +
+                        '<br>Completed: 2019/05/07 20:23:01">' +
+                        'union at StatApplyDetailService.scala:136 (Stage 14.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231599165),
+                    'end': new Date(1557231697391),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailDao.scala:218 (Stage 23.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:59' +
+                        '<br>Completed: 2019/05/07 20:21:37">' +
+                        'mapPartitions at StatApplyDetailDao.scala:218 (Stage 23.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231781984),
+                    'end': new Date(1557231827563),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailService.scala:144 (Stage 15.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:23:01' +
+                        '<br>Completed: 2019/05/07 20:23:47">' +
+                        'mapPartitions at StatApplyDetailService.scala:144 (Stage 15.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231599112),
+                    'end': new Date(1557231701900),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailDao.scala:146 (Stage 16.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:59' +
+                        '<br>Completed: 2019/05/07 20:21:41">' +
+                        'mapPartitions at StatApplyDetailDao.scala:146 (Stage 16.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231827573),
+                    'end': new Date(1557231880259),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailService.scala:170 (Stage 17.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:23:47' +
+                        '<br>Completed: 2019/05/07 20:24:40">' +
+                        'mapPartitions at StatApplyDetailService.scala:170 (Stage 17.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231880266),
+                    'end': new Date(1557231934005),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailService.scala:229 (Stage 18.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:24:40' +
+                        '<br>Completed: 2019/05/07 20:25:34">' +
+                        'mapPartitions at StatApplyDetailService.scala:229 (Stage 18.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231660214),
+                    'end': new Date(1557231698649),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailService.scala:55 (Stage 10.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:21:00' +
+                        '<br>Completed: 2019/05/07 20:21:38">' +
+                        'mapPartitions at StatApplyDetailService.scala:55 (Stage 10.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231698667),
+                    'end': new Date(1557231729606),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="filter at StatApplyDetailService.scala:105 (Stage 11.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:21:38' +
+                        '<br>Completed: 2019/05/07 20:22:09">' +
+                        'filter at StatApplyDetailService.scala:105 (Stage 11.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231599102),
+                    'end': new Date(1557231658906),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailDao.scala:116 (Stage 12.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:59' +
+                        '<br>Completed: 2019/05/07 20:20:58">' +
+                        'mapPartitions at StatApplyDetailDao.scala:116 (Stage 12.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231598989),
+                    'end': new Date(1557231686472),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailDao.scala:131 (Stage 13.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:58' +
+                        '<br>Completed: 2019/05/07 20:21:26">' +
+                        'mapPartitions at StatApplyDetailDao.scala:131 (Stage 13.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231599078),
+                    'end': new Date(1557231622230),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailDao.scala:74 (Stage 5.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:59' +
+                        '<br>Completed: 2019/05/07 20:20:22">' +
+                        'mapPartitions at StatApplyDetailDao.scala:74 (Stage 5.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231599091),
+                    'end': new Date(1557231628056),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailDao.scala:60 (Stage 6.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:59' +
+                        '<br>Completed: 2019/05/07 20:20:28">' +
+                        'mapPartitions at StatApplyDetailDao.scala:60 (Stage 6.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231599188),
+                    'end': new Date(1557231698040),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailDao.scala:244 (Stage 28.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:59' +
+                        '<br>Completed: 2019/05/07 20:21:38">' +
+                        'mapPartitions at StatApplyDetailDao.scala:244 (Stage 28.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231599056),
+                    'end': new Date(1557231632944),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailDao.scala:85 (Stage 7.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:19:59' +
+                        '<br>Completed: 2019/05/07 20:20:32">' +
+                        'mapPartitions at StatApplyDetailDao.scala:85 (Stage 7.0)</div>',
+                }
+                ,
+                {
+                    'className': 'stage job-timeline-object succeeded',
+                    'group': 'stages',
+                    'start': new Date(1557231628085),
+                    'end': new Date(1557231660197),
+                    'content': '<div class="job-timeline-content" data-toggle="tooltip"' +
+                        'data-placement="top" data-html="true"' +
+                        'data-title="mapPartitions at StatApplyDetailService.scala:44 (Stage 8.0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 20:20:28' +
+                        '<br>Completed: 2019/05/07 20:21:00">' +
+                        'mapPartitions at StatApplyDetailService.scala:44 (Stage 8.0)</div>',
+                }
+                ,
+                {
+                    'className': 'executor added',
+                    'group': 'executors',
+                    'start': new Date(1557231590953),
+                    'content': '<div class="executor-event-content"' +
+                        'data-toggle="tooltip" data-placement="bottom"' +
+                        'data-title="Executor 3<br>' +
+                        'Added at 2019/05/07 20:19:50"' +
+                        'data-html="true">Executor 3 added</div>'
+                }
+                ,
+                {
+                    'className': 'executor added',
+                    'group': 'executors',
+                    'start': new Date(1557231591029),
+                    'content': '<div class="executor-event-content"' +
+                        'data-toggle="tooltip" data-placement="bottom"' +
+                        'data-title="Executor 5<br>' +
+                        'Added at 2019/05/07 20:19:51"' +
+                        'data-html="true">Executor 5 added</div>'
+                }
+                ,
+                {
+                    'className': 'executor added',
+                    'group': 'executors',
+                    'start': new Date(1557231592661),
+                    'content': '<div class="executor-event-content"' +
+                        'data-toggle="tooltip" data-placement="bottom"' +
+                        'data-title="Executor 2<br>' +
+                        'Added at 2019/05/07 20:19:52"' +
+                        'data-html="true">Executor 2 added</div>'
+                }
+                ,
+                {
+                    'className': 'executor added',
+                    'group': 'executors',
+                    'start': new Date(1557231593716),
+                    'content': '<div class="executor-event-content"' +
+                        'data-toggle="tooltip" data-placement="bottom"' +
+                        'data-title="Executor 4<br>' +
+                        'Added at 2019/05/07 20:19:53"' +
+                        'data-html="true">Executor 4 added</div>'
+                }
+                ,
+                {
+                    'className': 'executor added',
+                    'group': 'executors',
+                    'start': new Date(1557231596700),
+                    'content': '<div class="executor-event-content"' +
+                        'data-toggle="tooltip" data-placement="bottom"' +
+                        'data-title="Executor 1<br>' +
+                        'Added at 2019/05/07 20:19:56"' +
+                        'data-html="true">Executor 1 added</div>'
+                }
+            ], 1557231586419, 480);
+    </script>
+    <div>
+<span class="expand-dag-viz" id="job-dag-viz" onclick="toggleDagViz(true);">
+<span class="expand-dag-viz-arrow arrow-closed"></span>
+<a data-placement="right" data-toggle="tooltip" title="Shows a graph of stages executed for this job, each of which can contain
+       multiple RDD operations (e.g. map() and filter()), and of RDDs inside each operation
+       (shown as dots).">
+          DAG Visualization
+        </a>
+</span>
+        <div id="dag-viz-graph"></div>
+        <div id="dag-viz-metadata" style="display:none">
+            <div class="stage-metadata" skipped="false" stage-id="1">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_1 {
+                    label="Stage 1";
+                    subgraph cluster81 {
+                    label="textFile";
+                    108 [label="webhdfs://jianbing/dwh/ods/shebaodb/20190312000057/sys_shebao_surname.txt
+                    [108]\ntextFile at StatApplyDetailDao.scala:202"];
+                    109 [label="webhdfs://jianbing/dwh/ods/shebaodb/20190312000057/sys_shebao_surname.txt
+                    [109]\ntextFile at StatApplyDetailDao.scala:202"];
+                    }
+                    subgraph cluster82 {
+                    label="filter";
+                    110 [label="MapPartitionsRDD [110]\nfilter at StatApplyDetailDao.scala:203"];
+                    }
+                    subgraph cluster83 {
+                    label="mapPartitions";
+                    111 [label="MapPartitionsRDD [111]\nmapPartitions at StatApplyDetailDao.scala:206"];
+                    }
+                    }
+                    108-&gt;109;
+                    109-&gt;110;
+                    110-&gt;111;
+                    }
+                </div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="2">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_2 {
+                    label="Stage 2";
+                    subgraph cluster54 {
+                    label="textFile";
+                    77 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/sys_apply_standard_sub.txt [77]\ntextFile
+                    at StatApplyDetailDao.scala:157"];
+                    78 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/sys_apply_standard_sub.txt [78]\ntextFile
+                    at StatApplyDetailDao.scala:157"];
+                    }
+                    subgraph cluster55 {
+                    label="filter";
+                    79 [label="MapPartitionsRDD [79]\nfilter at StatApplyDetailDao.scala:157"];
+                    }
+                    subgraph cluster56 {
+                    label="mapPartitions";
+                    80 [label="MapPartitionsRDD [80]\nmapPartitions at StatApplyDetailDao.scala:161"];
+                    }
+                    subgraph cluster57 {
+                    label="filter";
+                    81 [label="MapPartitionsRDD [81]\nfilter at StatApplyDetailService.scala:201"];
+                    }
+                    subgraph cluster58 {
+                    label="sortBy";
+                    82 [label="MapPartitionsRDD [82]\nsortBy at StatApplyDetailService.scala:205"];
+                    }
+                    }
+                    77-&gt;78;
+                    78-&gt;79;
+                    79-&gt;80;
+                    80-&gt;81;
+                    81-&gt;82;
+                    }
+                </div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="3">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_3 {
+                    label="Stage 3";
+                    subgraph cluster58 {
+                    label="sortBy";
+                    85 [label="ShuffledRDD [85]\nsortBy at StatApplyDetailService.scala:205"];
+                    86 [label="MapPartitionsRDD [86]\nsortBy at StatApplyDetailService.scala:205"];
+                    }
+                    subgraph cluster67 {
+                    label="groupBy";
+                    87 [label="MapPartitionsRDD [87]\ngroupBy at StatApplyDetailService.scala:209"];
+                    }
+                    }
+                    85-&gt;86;
+                    86-&gt;87;
+                    }
+                </div>
+                <div class="incoming-edge">82,85</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="4">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_4 {
+                    label="Stage 4";
+                    subgraph cluster67 {
+                    label="groupBy";
+                    88 [label="ShuffledRDD [88]\ngroupBy at StatApplyDetailService.scala:209"];
+                    }
+                    subgraph cluster68 {
+                    label="mapPartitions";
+                    89 [label="MapPartitionsRDD [89] [Cached]\nmapPartitions at StatApplyDetailService.scala:211"];
+                    }
+                    }
+                    88-&gt;89;
+                    }
+                </div>
+                <div class="incoming-edge">87,88</div>
+                <div class="cached-rdd">89</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="5">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_5 {
+                    label="Stage 5";
+                    subgraph cluster21 {
+                    label="textFile";
+                    28 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/sys_apply.txt [28]\ntextFile at
+                    StatApplyDetailDao.scala:27"];
+                    29 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/sys_apply.txt [29]\ntextFile at
+                    StatApplyDetailDao.scala:27"];
+                    }
+                    subgraph cluster22 {
+                    label="filter";
+                    30 [label="MapPartitionsRDD [30] [Cached]\nfilter at StatApplyDetailDao.scala:27"];
+                    }
+                    subgraph cluster23 {
+                    label="mapPartitions";
+                    31 [label="MapPartitionsRDD [31]\nmapPartitions at StatApplyDetailDao.scala:31"];
+                    }
+                    subgraph cluster24 {
+                    label="mapPartitions";
+                    32 [label="MapPartitionsRDD [32]\nmapPartitions at StatApplyDetailDao.scala:74"];
+                    }
+                    }
+                    28-&gt;29;
+                    29-&gt;30;
+                    30-&gt;31;
+                    31-&gt;32;
+                    }
+                </div>
+                <div class="cached-rdd">30</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="6">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_6 {
+                    label="Stage 6";
+                    subgraph cluster18 {
+                    label="textFile";
+                    24 [label="webhdfs://jianbing/tmp/db_txt/ods/input/ods_zfgjj_sys_apply_discard.txt [24]\ntextFile at
+                    StatApplyDetailDao.scala:56"];
+                    25 [label="webhdfs://jianbing/tmp/db_txt/ods/input/ods_zfgjj_sys_apply_discard.txt [25]\ntextFile at
+                    StatApplyDetailDao.scala:56"];
+                    }
+                    subgraph cluster19 {
+                    label="filter";
+                    26 [label="MapPartitionsRDD [26]\nfilter at StatApplyDetailDao.scala:56"];
+                    }
+                    subgraph cluster20 {
+                    label="mapPartitions";
+                    27 [label="MapPartitionsRDD [27]\nmapPartitions at StatApplyDetailDao.scala:60"];
+                    }
+                    }
+                    24-&gt;25;
+                    25-&gt;26;
+                    26-&gt;27;
+                    }
+                </div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="7">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_7 {
+                    label="Stage 7";
+                    subgraph cluster15 {
+                    label="textFile";
+                    20 [label="webhdfs://jianbing/dwh/dw/dwo/ods_zfgjj_sys_apply_info [20]\ntextFile at
+                    StatApplyDetailDao.scala:81"];
+                    21 [label="webhdfs://jianbing/dwh/dw/dwo/ods_zfgjj_sys_apply_info [21]\ntextFile at
+                    StatApplyDetailDao.scala:81"];
+                    }
+                    subgraph cluster16 {
+                    label="filter";
+                    22 [label="MapPartitionsRDD [22]\nfilter at StatApplyDetailDao.scala:82"];
+                    }
+                    subgraph cluster17 {
+                    label="mapPartitions";
+                    23 [label="MapPartitionsRDD [23]\nmapPartitions at StatApplyDetailDao.scala:85"];
+                    }
+                    }
+                    20-&gt;21;
+                    21-&gt;22;
+                    22-&gt;23;
+                    }
+                </div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="8">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_8 {
+                    label="Stage 8";
+                    subgraph cluster25 {
+                    label="leftOuterJoin";
+                    33 [label="CoGroupedRDD [33]\nleftOuterJoin at StatApplyDetailService.scala:19"];
+                    34 [label="MapPartitionsRDD [34]\nleftOuterJoin at StatApplyDetailService.scala:19"];
+                    35 [label="MapPartitionsRDD [35]\nleftOuterJoin at StatApplyDetailService.scala:19"];
+                    }
+                    subgraph cluster26 {
+                    label="filter";
+                    36 [label="MapPartitionsRDD [36]\nfilter at StatApplyDetailService.scala:20"];
+                    }
+                    subgraph cluster27 {
+                    label="map";
+                    37 [label="MapPartitionsRDD [37] [Cached]\nmap at StatApplyDetailService.scala:22"];
+                    }
+                    subgraph cluster28 {
+                    label="textFile";
+                    38 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/sys_apply.txt [38]\ntextFile at
+                    StatApplyDetailDao.scala:27"];
+                    39 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/sys_apply.txt [39]\ntextFile at
+                    StatApplyDetailDao.scala:27"];
+                    }
+                    subgraph cluster29 {
+                    label="filter";
+                    40 [label="MapPartitionsRDD [40] [Cached]\nfilter at StatApplyDetailDao.scala:27"];
+                    }
+                    subgraph cluster30 {
+                    label="mapPartitions";
+                    41 [label="MapPartitionsRDD [41]\nmapPartitions at StatApplyDetailDao.scala:31"];
+                    }
+                    subgraph cluster31 {
+                    label="filter";
+                    42 [label="MapPartitionsRDD [42]\nfilter at StatApplyDetailDao.scala:49"];
+                    }
+                    subgraph cluster32 {
+                    label="union";
+                    43 [label="UnionRDD [43]\nunion at StatApplyDetailService.scala:26"];
+                    }
+                    subgraph cluster33 {
+                    label="filter";
+                    44 [label="MapPartitionsRDD [44] [Cached]\nfilter at StatApplyDetailService.scala:34"];
+                    }
+                    subgraph cluster34 {
+                    label="mapPartitions";
+                    45 [label="MapPartitionsRDD [45]\nmapPartitions at StatApplyDetailService.scala:44"];
+                    }
+                    }
+                    33-&gt;34;
+                    34-&gt;35;
+                    35-&gt;36;
+                    36-&gt;37;
+                    38-&gt;39;
+                    39-&gt;40;
+                    40-&gt;41;
+                    41-&gt;42;
+                    42-&gt;43;
+                    37-&gt;43;
+                    43-&gt;44;
+                    44-&gt;45;
+                    }
+                </div>
+                <div class="incoming-edge">27,33</div>
+                <div class="incoming-edge">32,33</div>
+                <div class="cached-rdd">37</div>
+                <div class="cached-rdd">40</div>
+                <div class="cached-rdd">44</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="9">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_9 {
+                    label="Stage 9";
+                    subgraph cluster37 {
+                    label="textFile";
+                    50 [label="webhdfs://jianbing/tmp/db_txt/ods/input/hidden_gjj_brief_apply.txt [50]\ntextFile at
+                    StatApplyDetailDao.scala:95"];
+                    51 [label="webhdfs://jianbing/tmp/db_txt/ods/input/hidden_gjj_brief_apply.txt [51]\ntextFile at
+                    StatApplyDetailDao.scala:95"];
+                    }
+                    subgraph cluster38 {
+                    label="filter";
+                    52 [label="MapPartitionsRDD [52]\nfilter at StatApplyDetailDao.scala:96"];
+                    }
+                    subgraph cluster39 {
+                    label="mapPartitions";
+                    53 [label="MapPartitionsRDD [53]\nmapPartitions at StatApplyDetailDao.scala:101"];
+                    }
+                    }
+                    50-&gt;51;
+                    51-&gt;52;
+                    52-&gt;53;
+                    }
+                </div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="10">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_10 {
+                    label="Stage 10";
+                    subgraph cluster35 {
+                    label="leftOuterJoin";
+                    46 [label="CoGroupedRDD [46]\nleftOuterJoin at StatApplyDetailService.scala:54"];
+                    47 [label="MapPartitionsRDD [47]\nleftOuterJoin at StatApplyDetailService.scala:54"];
+                    48 [label="MapPartitionsRDD [48]\nleftOuterJoin at StatApplyDetailService.scala:54"];
+                    }
+                    subgraph cluster36 {
+                    label="mapPartitions";
+                    49 [label="MapPartitionsRDD [49]\nmapPartitions at StatApplyDetailService.scala:55"];
+                    }
+                    }
+                    46-&gt;47;
+                    47-&gt;48;
+                    48-&gt;49;
+                    }
+                </div>
+                <div class="incoming-edge">45,46</div>
+                <div class="incoming-edge">23,46</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="11">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_11 {
+                    label="Stage 11";
+                    subgraph cluster40 {
+                    label="leftOuterJoin";
+                    54 [label="CoGroupedRDD [54]\nleftOuterJoin at StatApplyDetailService.scala:87"];
+                    55 [label="MapPartitionsRDD [55]\nleftOuterJoin at StatApplyDetailService.scala:87"];
+                    56 [label="MapPartitionsRDD [56]\nleftOuterJoin at StatApplyDetailService.scala:87"];
+                    }
+                    subgraph cluster41 {
+                    label="mapPartitions";
+                    57 [label="MapPartitionsRDD [57] [Cached]\nmapPartitions at StatApplyDetailService.scala:88"];
+                    }
+                    subgraph cluster42 {
+                    label="filter";
+                    58 [label="MapPartitionsRDD [58] [Cached]\nfilter at StatApplyDetailService.scala:105"];
+                    }
+                    }
+                    54-&gt;55;
+                    55-&gt;56;
+                    56-&gt;57;
+                    57-&gt;58;
+                    }
+                </div>
+                <div class="incoming-edge">49,54</div>
+                <div class="incoming-edge">53,54</div>
+                <div class="cached-rdd">57</div>
+                <div class="cached-rdd">58</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="12">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_12 {
+                    label="Stage 12";
+                    subgraph cluster44 {
+                    label="textFile";
+                    60 [label="webhdfs://jianbing/tmp/db_txt/ods/input/ods_zfgjj_sys_apply_discard_ppd.txt
+                    [60]\ntextFile at StatApplyDetailDao.scala:112"];
+                    61 [label="webhdfs://jianbing/tmp/db_txt/ods/input/ods_zfgjj_sys_apply_discard_ppd.txt
+                    [61]\ntextFile at StatApplyDetailDao.scala:112"];
+                    }
+                    subgraph cluster45 {
+                    label="filter";
+                    62 [label="MapPartitionsRDD [62]\nfilter at StatApplyDetailDao.scala:112"];
+                    }
+                    subgraph cluster46 {
+                    label="mapPartitions";
+                    63 [label="MapPartitionsRDD [63]\nmapPartitions at StatApplyDetailDao.scala:116"];
+                    }
+                    }
+                    60-&gt;61;
+                    61-&gt;62;
+                    62-&gt;63;
+                    }
+                </div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="13">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_13 {
+                    label="Stage 13";
+                    subgraph cluster12 {
+                    label="textFile";
+                    16 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/sys_certification.txt [16]\ntextFile at
+                    StatApplyDetailDao.scala:127"];
+                    17 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/sys_certification.txt [17]\ntextFile at
+                    StatApplyDetailDao.scala:127"];
+                    }
+                    subgraph cluster13 {
+                    label="filter";
+                    18 [label="MapPartitionsRDD [18]\nfilter at StatApplyDetailDao.scala:127"];
+                    }
+                    subgraph cluster14 {
+                    label="mapPartitions";
+                    19 [label="MapPartitionsRDD [19] [Cached]\nmapPartitions at StatApplyDetailDao.scala:131"];
+                    }
+                    }
+                    16-&gt;17;
+                    17-&gt;18;
+                    18-&gt;19;
+                    }
+                </div>
+                <div class="cached-rdd">19</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="14">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_14 {
+                    label="Stage 14";
+                    subgraph cluster40 {
+                    label="leftOuterJoin";
+                    54 [label="CoGroupedRDD [54]\nleftOuterJoin at StatApplyDetailService.scala:87"];
+                    55 [label="MapPartitionsRDD [55]\nleftOuterJoin at StatApplyDetailService.scala:87"];
+                    56 [label="MapPartitionsRDD [56]\nleftOuterJoin at StatApplyDetailService.scala:87"];
+                    }
+                    subgraph cluster41 {
+                    label="mapPartitions";
+                    57 [label="MapPartitionsRDD [57] [Cached]\nmapPartitions at StatApplyDetailService.scala:88"];
+                    }
+                    subgraph cluster43 {
+                    label="filter";
+                    59 [label="MapPartitionsRDD [59] [Cached]\nfilter at StatApplyDetailService.scala:109"];
+                    }
+                    subgraph cluster47 {
+                    label="leftOuterJoin";
+                    64 [label="CoGroupedRDD [64]\nleftOuterJoin at StatApplyDetailService.scala:116"];
+                    65 [label="MapPartitionsRDD [65]\nleftOuterJoin at StatApplyDetailService.scala:116"];
+                    66 [label="MapPartitionsRDD [66]\nleftOuterJoin at StatApplyDetailService.scala:116"];
+                    }
+                    subgraph cluster48 {
+                    label="mapPartitions";
+                    67 [label="MapPartitionsRDD [67]\nmapPartitions at StatApplyDetailService.scala:116"];
+                    }
+                    subgraph cluster49 {
+                    label="union";
+                    68 [label="UnionRDD [68] [Cached]\nunion at StatApplyDetailService.scala:136"];
+                    }
+                    }
+                    54-&gt;55;
+                    55-&gt;56;
+                    56-&gt;57;
+                    57-&gt;59;
+                    64-&gt;65;
+                    65-&gt;66;
+                    66-&gt;67;
+                    59-&gt;68;
+                    67-&gt;68;
+                    }
+                </div>
+                <div class="incoming-edge">49,54</div>
+                <div class="incoming-edge">53,54</div>
+                <div class="incoming-edge">58,64</div>
+                <div class="incoming-edge">63,64</div>
+                <div class="cached-rdd">57</div>
+                <div class="cached-rdd">59</div>
+                <div class="cached-rdd">68</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="15">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_15 {
+                    label="Stage 15";
+                    subgraph cluster50 {
+                    label="leftOuterJoin";
+                    69 [label="CoGroupedRDD [69]\nleftOuterJoin at StatApplyDetailService.scala:141"];
+                    70 [label="MapPartitionsRDD [70]\nleftOuterJoin at StatApplyDetailService.scala:141"];
+                    71 [label="MapPartitionsRDD [71] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:141"];
+                    }
+                    subgraph cluster51 {
+                    label="mapPartitions";
+                    72 [label="MapPartitionsRDD [72]\nmapPartitions at StatApplyDetailService.scala:144"];
+                    }
+                    }
+                    69-&gt;70;
+                    70-&gt;71;
+                    71-&gt;72;
+                    }
+                </div>
+                <div class="incoming-edge">68,69</div>
+                <div class="incoming-edge">19,69</div>
+                <div class="cached-rdd">71</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="16">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_16 {
+                    label="Stage 16";
+                    subgraph cluster9 {
+                    label="textFile";
+                    12 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/stat_apply_revenue.txt [12]\ntextFile at
+                    StatApplyDetailDao.scala:142"];
+                    13 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/stat_apply_revenue.txt [13]\ntextFile at
+                    StatApplyDetailDao.scala:142"];
+                    }
+                    subgraph cluster10 {
+                    label="filter";
+                    14 [label="MapPartitionsRDD [14]\nfilter at StatApplyDetailDao.scala:142"];
+                    }
+                    subgraph cluster11 {
+                    label="mapPartitions";
+                    15 [label="MapPartitionsRDD [15]\nmapPartitions at StatApplyDetailDao.scala:146"];
+                    }
+                    }
+                    12-&gt;13;
+                    13-&gt;14;
+                    14-&gt;15;
+                    }
+                </div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="17">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_17 {
+                    label="Stage 17";
+                    subgraph cluster52 {
+                    label="leftOuterJoin";
+                    73 [label="CoGroupedRDD [73]\nleftOuterJoin at StatApplyDetailService.scala:167"];
+                    74 [label="MapPartitionsRDD [74]\nleftOuterJoin at StatApplyDetailService.scala:167"];
+                    75 [label="MapPartitionsRDD [75] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:167"];
+                    }
+                    subgraph cluster53 {
+                    label="mapPartitions";
+                    76 [label="MapPartitionsRDD [76] [Cached]\nmapPartitions at StatApplyDetailService.scala:170"];
+                    }
+                    }
+                    73-&gt;74;
+                    74-&gt;75;
+                    75-&gt;76;
+                    }
+                </div>
+                <div class="incoming-edge">72,73</div>
+                <div class="incoming-edge">15,73</div>
+                <div class="cached-rdd">75</div>
+                <div class="cached-rdd">76</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="18">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_18 {
+                    label="Stage 18";
+                    subgraph cluster69 {
+                    label="leftOuterJoin";
+                    90 [label="CoGroupedRDD [90]\nleftOuterJoin at StatApplyDetailService.scala:226"];
+                    91 [label="MapPartitionsRDD [91]\nleftOuterJoin at StatApplyDetailService.scala:226"];
+                    92 [label="MapPartitionsRDD [92] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:226"];
+                    }
+                    subgraph cluster70 {
+                    label="mapPartitions";
+                    93 [label="MapPartitionsRDD [93] [Cached]\nmapPartitions at StatApplyDetailService.scala:229"];
+                    }
+                    }
+                    90-&gt;91;
+                    91-&gt;92;
+                    92-&gt;93;
+                    }
+                </div>
+                <div class="incoming-edge">76,90</div>
+                <div class="incoming-edge">89,90</div>
+                <div class="cached-rdd">92</div>
+                <div class="cached-rdd">93</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="19">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_19 {
+                    label="Stage 19";
+                    subgraph cluster3 {
+                    label="textFile";
+                    4 [label="webhdfs://jianbing/dwh/ods/zfgjj3/20190406232949/sys_gjj_brief.txt [4]\ntextFile at
+                    StatApplyDetailDao.scala:186"];
+                    5 [label="webhdfs://jianbing/dwh/ods/zfgjj3/20190406232949/sys_gjj_brief.txt [5]\ntextFile at
+                    StatApplyDetailDao.scala:186"];
+                    }
+                    subgraph cluster4 {
+                    label="filter";
+                    6 [label="MapPartitionsRDD [6]\nfilter at StatApplyDetailDao.scala:187"];
+                    }
+                    subgraph cluster5 {
+                    label="mapPartitions";
+                    7 [label="MapPartitionsRDD [7]\nmapPartitions at StatApplyDetailDao.scala:192"];
+                    }
+                    }
+                    4-&gt;5;
+                    5-&gt;6;
+                    6-&gt;7;
+                    }
+                </div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="20">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_20 {
+                    label="Stage 20";
+                    subgraph cluster6 {
+                    label="textFile";
+                    8 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/cfg_stat_status.txt [8]\ntextFile at
+                    StatApplyDetailDao.scala:169"];
+                    9 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/cfg_stat_status.txt [9]\ntextFile at
+                    StatApplyDetailDao.scala:169"];
+                    }
+                    subgraph cluster7 {
+                    label="filter";
+                    10 [label="MapPartitionsRDD [10]\nfilter at StatApplyDetailDao.scala:169"];
+                    }
+                    subgraph cluster8 {
+                    label="mapPartitions";
+                    11 [label="MapPartitionsRDD [11]\nmapPartitions at StatApplyDetailDao.scala:173"];
+                    }
+                    }
+                    8-&gt;9;
+                    9-&gt;10;
+                    10-&gt;11;
+                    }
+                </div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="21">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_21 {
+                    label="Stage 21";
+                    subgraph cluster71 {
+                    label="leftOuterJoin";
+                    94 [label="CoGroupedRDD [94]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    95 [label="MapPartitionsRDD [95]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    96 [label="MapPartitionsRDD [96] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    }
+                    subgraph cluster72 {
+                    label="mapPartitions";
+                    97 [label="MapPartitionsRDD [97] [Cached]\nmapPartitions at StatApplyDetailService.scala:265"];
+                    }
+                    subgraph cluster73 {
+                    label="filter";
+                    98 [label="MapPartitionsRDD [98] [Cached]\nfilter at StatApplyDetailService.scala:290"];
+                    }
+                    }
+                    94-&gt;95;
+                    95-&gt;96;
+                    96-&gt;97;
+                    97-&gt;98;
+                    }
+                </div>
+                <div class="incoming-edge">93,94</div>
+                <div class="incoming-edge">11,94</div>
+                <div class="cached-rdd">96</div>
+                <div class="cached-rdd">97</div>
+                <div class="cached-rdd">98</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="22">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_22 {
+                    label="Stage 22";
+                    subgraph cluster71 {
+                    label="leftOuterJoin";
+                    94 [label="CoGroupedRDD [94]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    95 [label="MapPartitionsRDD [95]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    96 [label="MapPartitionsRDD [96] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    }
+                    subgraph cluster72 {
+                    label="mapPartitions";
+                    97 [label="MapPartitionsRDD [97] [Cached]\nmapPartitions at StatApplyDetailService.scala:265"];
+                    }
+                    subgraph cluster74 {
+                    label="filter";
+                    99 [label="MapPartitionsRDD [99] [Cached]\nfilter at StatApplyDetailService.scala:293"];
+                    }
+                    subgraph cluster75 {
+                    label="leftOuterJoin";
+                    100 [label="CoGroupedRDD [100]\nleftOuterJoin at StatApplyDetailService.scala:297"];
+                    101 [label="MapPartitionsRDD [101]\nleftOuterJoin at StatApplyDetailService.scala:297"];
+                    102 [label="MapPartitionsRDD [102] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:297"];
+                    }
+                    subgraph cluster76 {
+                    label="mapPartitions";
+                    103 [label="MapPartitionsRDD [103] [Cached]\nmapPartitions at StatApplyDetailService.scala:300"];
+                    }
+                    subgraph cluster77 {
+                    label="mapPartitions";
+                    104 [label="MapPartitionsRDD [104] [Cached]\nmapPartitions at StatApplyDetailService.scala:324"];
+                    }
+                    subgraph cluster78 {
+                    label="union";
+                    105 [label="UnionRDD [105] [Cached]\nunion at StatApplyDetailService.scala:331"];
+                    }
+                    subgraph cluster79 {
+                    label="filter";
+                    106 [label="MapPartitionsRDD [106] [Cached]\nfilter at StatApplyDetailService.scala:336"];
+                    }
+                    }
+                    94-&gt;95;
+                    95-&gt;96;
+                    96-&gt;97;
+                    97-&gt;99;
+                    100-&gt;101;
+                    101-&gt;102;
+                    102-&gt;103;
+                    99-&gt;104;
+                    103-&gt;105;
+                    104-&gt;105;
+                    105-&gt;106;
+                    }
+                </div>
+                <div class="incoming-edge">93,94</div>
+                <div class="incoming-edge">11,94</div>
+                <div class="incoming-edge">98,100</div>
+                <div class="incoming-edge">7,100</div>
+                <div class="cached-rdd">96</div>
+                <div class="cached-rdd">97</div>
+                <div class="cached-rdd">99</div>
+                <div class="cached-rdd">102</div>
+                <div class="cached-rdd">103</div>
+                <div class="cached-rdd">104</div>
+                <div class="cached-rdd">105</div>
+                <div class="cached-rdd">106</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="23">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_23 {
+                    label="Stage 23";
+                    subgraph cluster90 {
+                    label="textFile";
+                    120 [label="webhdfs://jianbing/dwh/ods/zfgjj3/20190406232949/cfg_location_extend.txt [120]\ntextFile
+                    at StatApplyDetailDao.scala:214"];
+                    121 [label="webhdfs://jianbing/dwh/ods/zfgjj3/20190406232949/cfg_location_extend.txt [121]\ntextFile
+                    at StatApplyDetailDao.scala:214"];
+                    }
+                    subgraph cluster91 {
+                    label="filter";
+                    122 [label="MapPartitionsRDD [122]\nfilter at StatApplyDetailDao.scala:215"];
+                    }
+                    subgraph cluster92 {
+                    label="mapPartitions";
+                    123 [label="MapPartitionsRDD [123]\nmapPartitions at StatApplyDetailDao.scala:218"];
+                    }
+                    }
+                    120-&gt;121;
+                    121-&gt;122;
+                    122-&gt;123;
+                    }
+                </div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="24">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_24 {
+                    label="Stage 24";
+                    subgraph cluster71 {
+                    label="leftOuterJoin";
+                    94 [label="CoGroupedRDD [94]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    95 [label="MapPartitionsRDD [95]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    96 [label="MapPartitionsRDD [96] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    }
+                    subgraph cluster72 {
+                    label="mapPartitions";
+                    97 [label="MapPartitionsRDD [97] [Cached]\nmapPartitions at StatApplyDetailService.scala:265"];
+                    }
+                    subgraph cluster74 {
+                    label="filter";
+                    99 [label="MapPartitionsRDD [99] [Cached]\nfilter at StatApplyDetailService.scala:293"];
+                    }
+                    subgraph cluster75 {
+                    label="leftOuterJoin";
+                    100 [label="CoGroupedRDD [100]\nleftOuterJoin at StatApplyDetailService.scala:297"];
+                    101 [label="MapPartitionsRDD [101]\nleftOuterJoin at StatApplyDetailService.scala:297"];
+                    102 [label="MapPartitionsRDD [102] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:297"];
+                    }
+                    subgraph cluster76 {
+                    label="mapPartitions";
+                    103 [label="MapPartitionsRDD [103] [Cached]\nmapPartitions at StatApplyDetailService.scala:300"];
+                    }
+                    subgraph cluster77 {
+                    label="mapPartitions";
+                    104 [label="MapPartitionsRDD [104] [Cached]\nmapPartitions at StatApplyDetailService.scala:324"];
+                    }
+                    subgraph cluster78 {
+                    label="union";
+                    105 [label="UnionRDD [105] [Cached]\nunion at StatApplyDetailService.scala:331"];
+                    }
+                    subgraph cluster80 {
+                    label="filter";
+                    107 [label="MapPartitionsRDD [107] [Cached]\nfilter at StatApplyDetailService.scala:339"];
+                    }
+                    subgraph cluster84 {
+                    label="leftOuterJoin";
+                    112 [label="CoGroupedRDD [112]\nleftOuterJoin at StatApplyDetailService.scala:344"];
+                    113 [label="MapPartitionsRDD [113]\nleftOuterJoin at StatApplyDetailService.scala:344"];
+                    114 [label="MapPartitionsRDD [114] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:344"];
+                    }
+                    subgraph cluster85 {
+                    label="mapPartitions";
+                    115 [label="MapPartitionsRDD [115] [Cached]\nmapPartitions at StatApplyDetailService.scala:347"];
+                    }
+                    subgraph cluster86 {
+                    label="mapPartitions";
+                    116 [label="MapPartitionsRDD [116] [Cached]\nmapPartitions at StatApplyDetailService.scala:369"];
+                    }
+                    subgraph cluster87 {
+                    label="union";
+                    117 [label="UnionRDD [117] [Cached]\nunion at StatApplyDetailService.scala:379"];
+                    }
+                    subgraph cluster88 {
+                    label="filter";
+                    118 [label="MapPartitionsRDD [118] [Cached]\nfilter at StatApplyDetailService.scala:385"];
+                    }
+                    }
+                    94-&gt;95;
+                    95-&gt;96;
+                    96-&gt;97;
+                    97-&gt;99;
+                    100-&gt;101;
+                    101-&gt;102;
+                    102-&gt;103;
+                    99-&gt;104;
+                    103-&gt;105;
+                    104-&gt;105;
+                    105-&gt;107;
+                    112-&gt;113;
+                    113-&gt;114;
+                    114-&gt;115;
+                    107-&gt;116;
+                    115-&gt;117;
+                    116-&gt;117;
+                    117-&gt;118;
+                    }
+                </div>
+                <div class="incoming-edge">93,94</div>
+                <div class="incoming-edge">11,94</div>
+                <div class="incoming-edge">98,100</div>
+                <div class="incoming-edge">7,100</div>
+                <div class="incoming-edge">106,112</div>
+                <div class="incoming-edge">111,112</div>
+                <div class="cached-rdd">96</div>
+                <div class="cached-rdd">97</div>
+                <div class="cached-rdd">99</div>
+                <div class="cached-rdd">102</div>
+                <div class="cached-rdd">103</div>
+                <div class="cached-rdd">104</div>
+                <div class="cached-rdd">105</div>
+                <div class="cached-rdd">107</div>
+                <div class="cached-rdd">114</div>
+                <div class="cached-rdd">115</div>
+                <div class="cached-rdd">116</div>
+                <div class="cached-rdd">117</div>
+                <div class="cached-rdd">118</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="25">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_25 {
+                    label="Stage 25";
+                    subgraph cluster99 {
+                    label="textFile";
+                    132 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/cfg_location.txt [132]\ntextFile at
+                    StatApplyDetailDao.scala:227"];
+                    133 [label="webhdfs://jianbing/dwh/ods/zfgjj/20190403134553/cfg_location.txt [133]\ntextFile at
+                    StatApplyDetailDao.scala:227"];
+                    }
+                    subgraph cluster100 {
+                    label="filter";
+                    134 [label="MapPartitionsRDD [134]\nfilter at StatApplyDetailDao.scala:227"];
+                    }
+                    subgraph cluster101 {
+                    label="mapPartitions";
+                    135 [label="MapPartitionsRDD [135]\nmapPartitions at StatApplyDetailDao.scala:231"];
+                    }
+                    }
+                    132-&gt;133;
+                    133-&gt;134;
+                    134-&gt;135;
+                    }
+                </div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="26">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_26 {
+                    label="Stage 26";
+                    subgraph cluster71 {
+                    label="leftOuterJoin";
+                    94 [label="CoGroupedRDD [94]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    95 [label="MapPartitionsRDD [95]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    96 [label="MapPartitionsRDD [96] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    }
+                    subgraph cluster72 {
+                    label="mapPartitions";
+                    97 [label="MapPartitionsRDD [97] [Cached]\nmapPartitions at StatApplyDetailService.scala:265"];
+                    }
+                    subgraph cluster74 {
+                    label="filter";
+                    99 [label="MapPartitionsRDD [99] [Cached]\nfilter at StatApplyDetailService.scala:293"];
+                    }
+                    subgraph cluster75 {
+                    label="leftOuterJoin";
+                    100 [label="CoGroupedRDD [100]\nleftOuterJoin at StatApplyDetailService.scala:297"];
+                    101 [label="MapPartitionsRDD [101]\nleftOuterJoin at StatApplyDetailService.scala:297"];
+                    102 [label="MapPartitionsRDD [102] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:297"];
+                    }
+                    subgraph cluster76 {
+                    label="mapPartitions";
+                    103 [label="MapPartitionsRDD [103] [Cached]\nmapPartitions at StatApplyDetailService.scala:300"];
+                    }
+                    subgraph cluster77 {
+                    label="mapPartitions";
+                    104 [label="MapPartitionsRDD [104] [Cached]\nmapPartitions at StatApplyDetailService.scala:324"];
+                    }
+                    subgraph cluster78 {
+                    label="union";
+                    105 [label="UnionRDD [105] [Cached]\nunion at StatApplyDetailService.scala:331"];
+                    }
+                    subgraph cluster80 {
+                    label="filter";
+                    107 [label="MapPartitionsRDD [107] [Cached]\nfilter at StatApplyDetailService.scala:339"];
+                    }
+                    subgraph cluster84 {
+                    label="leftOuterJoin";
+                    112 [label="CoGroupedRDD [112]\nleftOuterJoin at StatApplyDetailService.scala:344"];
+                    113 [label="MapPartitionsRDD [113]\nleftOuterJoin at StatApplyDetailService.scala:344"];
+                    114 [label="MapPartitionsRDD [114] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:344"];
+                    }
+                    subgraph cluster85 {
+                    label="mapPartitions";
+                    115 [label="MapPartitionsRDD [115] [Cached]\nmapPartitions at StatApplyDetailService.scala:347"];
+                    }
+                    subgraph cluster86 {
+                    label="mapPartitions";
+                    116 [label="MapPartitionsRDD [116] [Cached]\nmapPartitions at StatApplyDetailService.scala:369"];
+                    }
+                    subgraph cluster87 {
+                    label="union";
+                    117 [label="UnionRDD [117] [Cached]\nunion at StatApplyDetailService.scala:379"];
+                    }
+                    subgraph cluster89 {
+                    label="filter";
+                    119 [label="MapPartitionsRDD [119] [Cached]\nfilter at StatApplyDetailService.scala:388"];
+                    }
+                    subgraph cluster93 {
+                    label="leftOuterJoin";
+                    124 [label="CoGroupedRDD [124]\nleftOuterJoin at StatApplyDetailService.scala:393"];
+                    125 [label="MapPartitionsRDD [125]\nleftOuterJoin at StatApplyDetailService.scala:393"];
+                    126 [label="MapPartitionsRDD [126] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:393"];
+                    }
+                    subgraph cluster94 {
+                    label="mapPartitions";
+                    127 [label="MapPartitionsRDD [127]\nmapPartitions at StatApplyDetailService.scala:396"];
+                    }
+                    subgraph cluster95 {
+                    label="mapPartitions";
+                    128 [label="MapPartitionsRDD [128] [Cached]\nmapPartitions at StatApplyDetailService.scala:418"];
+                    }
+                    subgraph cluster96 {
+                    label="union";
+                    129 [label="UnionRDD [129] [Cached]\nunion at StatApplyDetailService.scala:427"];
+                    }
+                    subgraph cluster97 {
+                    label="filter";
+                    130 [label="MapPartitionsRDD [130] [Cached]\nfilter at StatApplyDetailService.scala:431"];
+                    }
+                    }
+                    94-&gt;95;
+                    95-&gt;96;
+                    96-&gt;97;
+                    97-&gt;99;
+                    100-&gt;101;
+                    101-&gt;102;
+                    102-&gt;103;
+                    99-&gt;104;
+                    103-&gt;105;
+                    104-&gt;105;
+                    105-&gt;107;
+                    112-&gt;113;
+                    113-&gt;114;
+                    114-&gt;115;
+                    107-&gt;116;
+                    115-&gt;117;
+                    116-&gt;117;
+                    117-&gt;119;
+                    124-&gt;125;
+                    125-&gt;126;
+                    126-&gt;127;
+                    119-&gt;128;
+                    127-&gt;129;
+                    128-&gt;129;
+                    129-&gt;130;
+                    }
+                </div>
+                <div class="incoming-edge">93,94</div>
+                <div class="incoming-edge">11,94</div>
+                <div class="incoming-edge">98,100</div>
+                <div class="incoming-edge">7,100</div>
+                <div class="incoming-edge">106,112</div>
+                <div class="incoming-edge">111,112</div>
+                <div class="incoming-edge">118,124</div>
+                <div class="incoming-edge">123,124</div>
+                <div class="cached-rdd">96</div>
+                <div class="cached-rdd">97</div>
+                <div class="cached-rdd">99</div>
+                <div class="cached-rdd">102</div>
+                <div class="cached-rdd">103</div>
+                <div class="cached-rdd">104</div>
+                <div class="cached-rdd">105</div>
+                <div class="cached-rdd">107</div>
+                <div class="cached-rdd">114</div>
+                <div class="cached-rdd">115</div>
+                <div class="cached-rdd">116</div>
+                <div class="cached-rdd">117</div>
+                <div class="cached-rdd">119</div>
+                <div class="cached-rdd">126</div>
+                <div class="cached-rdd">128</div>
+                <div class="cached-rdd">129</div>
+                <div class="cached-rdd">130</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="27">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_27 {
+                    label="Stage 27";
+                    subgraph cluster71 {
+                    label="leftOuterJoin";
+                    94 [label="CoGroupedRDD [94]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    95 [label="MapPartitionsRDD [95]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    96 [label="MapPartitionsRDD [96] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:262"];
+                    }
+                    subgraph cluster72 {
+                    label="mapPartitions";
+                    97 [label="MapPartitionsRDD [97] [Cached]\nmapPartitions at StatApplyDetailService.scala:265"];
+                    }
+                    subgraph cluster74 {
+                    label="filter";
+                    99 [label="MapPartitionsRDD [99] [Cached]\nfilter at StatApplyDetailService.scala:293"];
+                    }
+                    subgraph cluster75 {
+                    label="leftOuterJoin";
+                    100 [label="CoGroupedRDD [100]\nleftOuterJoin at StatApplyDetailService.scala:297"];
+                    101 [label="MapPartitionsRDD [101]\nleftOuterJoin at StatApplyDetailService.scala:297"];
+                    102 [label="MapPartitionsRDD [102] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:297"];
+                    }
+                    subgraph cluster76 {
+                    label="mapPartitions";
+                    103 [label="MapPartitionsRDD [103] [Cached]\nmapPartitions at StatApplyDetailService.scala:300"];
+                    }
+                    subgraph cluster77 {
+                    label="mapPartitions";
+                    104 [label="MapPartitionsRDD [104] [Cached]\nmapPartitions at StatApplyDetailService.scala:324"];
+                    }
+                    subgraph cluster78 {
+                    label="union";
+                    105 [label="UnionRDD [105] [Cached]\nunion at StatApplyDetailService.scala:331"];
+                    }
+                    subgraph cluster80 {
+                    label="filter";
+                    107 [label="MapPartitionsRDD [107] [Cached]\nfilter at StatApplyDetailService.scala:339"];
+                    }
+                    subgraph cluster84 {
+                    label="leftOuterJoin";
+                    112 [label="CoGroupedRDD [112]\nleftOuterJoin at StatApplyDetailService.scala:344"];
+                    113 [label="MapPartitionsRDD [113]\nleftOuterJoin at StatApplyDetailService.scala:344"];
+                    114 [label="MapPartitionsRDD [114] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:344"];
+                    }
+                    subgraph cluster85 {
+                    label="mapPartitions";
+                    115 [label="MapPartitionsRDD [115] [Cached]\nmapPartitions at StatApplyDetailService.scala:347"];
+                    }
+                    subgraph cluster86 {
+                    label="mapPartitions";
+                    116 [label="MapPartitionsRDD [116] [Cached]\nmapPartitions at StatApplyDetailService.scala:369"];
+                    }
+                    subgraph cluster87 {
+                    label="union";
+                    117 [label="UnionRDD [117] [Cached]\nunion at StatApplyDetailService.scala:379"];
+                    }
+                    subgraph cluster89 {
+                    label="filter";
+                    119 [label="MapPartitionsRDD [119] [Cached]\nfilter at StatApplyDetailService.scala:388"];
+                    }
+                    subgraph cluster93 {
+                    label="leftOuterJoin";
+                    124 [label="CoGroupedRDD [124]\nleftOuterJoin at StatApplyDetailService.scala:393"];
+                    125 [label="MapPartitionsRDD [125]\nleftOuterJoin at StatApplyDetailService.scala:393"];
+                    126 [label="MapPartitionsRDD [126] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:393"];
+                    }
+                    subgraph cluster94 {
+                    label="mapPartitions";
+                    127 [label="MapPartitionsRDD [127]\nmapPartitions at StatApplyDetailService.scala:396"];
+                    }
+                    subgraph cluster95 {
+                    label="mapPartitions";
+                    128 [label="MapPartitionsRDD [128] [Cached]\nmapPartitions at StatApplyDetailService.scala:418"];
+                    }
+                    subgraph cluster96 {
+                    label="union";
+                    129 [label="UnionRDD [129] [Cached]\nunion at StatApplyDetailService.scala:427"];
+                    }
+                    subgraph cluster98 {
+                    label="filter";
+                    131 [label="MapPartitionsRDD [131] [Cached]\nfilter at StatApplyDetailService.scala:434"];
+                    }
+                    subgraph cluster102 {
+                    label="leftOuterJoin";
+                    136 [label="CoGroupedRDD [136]\nleftOuterJoin at StatApplyDetailService.scala:439"];
+                    137 [label="MapPartitionsRDD [137]\nleftOuterJoin at StatApplyDetailService.scala:439"];
+                    138 [label="MapPartitionsRDD [138] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:439"];
+                    }
+                    subgraph cluster103 {
+                    label="mapPartitions";
+                    139 [label="MapPartitionsRDD [139] [Cached]\nmapPartitions at StatApplyDetailService.scala:442"];
+                    }
+                    subgraph cluster104 {
+                    label="mapPartitions";
+                    140 [label="MapPartitionsRDD [140] [Cached]\nmapPartitions at StatApplyDetailService.scala:463"];
+                    }
+                    subgraph cluster105 {
+                    label="union";
+                    141 [label="UnionRDD [141] [Cached]\nunion at StatApplyDetailService.scala:471"];
+                    }
+                    }
+                    94-&gt;95;
+                    95-&gt;96;
+                    96-&gt;97;
+                    97-&gt;99;
+                    100-&gt;101;
+                    101-&gt;102;
+                    102-&gt;103;
+                    99-&gt;104;
+                    103-&gt;105;
+                    104-&gt;105;
+                    105-&gt;107;
+                    112-&gt;113;
+                    113-&gt;114;
+                    114-&gt;115;
+                    107-&gt;116;
+                    115-&gt;117;
+                    116-&gt;117;
+                    117-&gt;119;
+                    124-&gt;125;
+                    125-&gt;126;
+                    126-&gt;127;
+                    119-&gt;128;
+                    127-&gt;129;
+                    128-&gt;129;
+                    129-&gt;131;
+                    136-&gt;137;
+                    137-&gt;138;
+                    138-&gt;139;
+                    131-&gt;140;
+                    139-&gt;141;
+                    140-&gt;141;
+                    }
+                </div>
+                <div class="incoming-edge">93,94</div>
+                <div class="incoming-edge">11,94</div>
+                <div class="incoming-edge">98,100</div>
+                <div class="incoming-edge">7,100</div>
+                <div class="incoming-edge">106,112</div>
+                <div class="incoming-edge">111,112</div>
+                <div class="incoming-edge">118,124</div>
+                <div class="incoming-edge">123,124</div>
+                <div class="incoming-edge">130,136</div>
+                <div class="incoming-edge">135,136</div>
+                <div class="cached-rdd">96</div>
+                <div class="cached-rdd">97</div>
+                <div class="cached-rdd">99</div>
+                <div class="cached-rdd">102</div>
+                <div class="cached-rdd">103</div>
+                <div class="cached-rdd">104</div>
+                <div class="cached-rdd">105</div>
+                <div class="cached-rdd">107</div>
+                <div class="cached-rdd">114</div>
+                <div class="cached-rdd">115</div>
+                <div class="cached-rdd">116</div>
+                <div class="cached-rdd">117</div>
+                <div class="cached-rdd">119</div>
+                <div class="cached-rdd">126</div>
+                <div class="cached-rdd">128</div>
+                <div class="cached-rdd">129</div>
+                <div class="cached-rdd">131</div>
+                <div class="cached-rdd">138</div>
+                <div class="cached-rdd">139</div>
+                <div class="cached-rdd">140</div>
+                <div class="cached-rdd">141</div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="28">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_28 {
+                    label="Stage 28";
+                    subgraph cluster0 {
+                    label="textFile";
+                    0 [label="webhdfs://jianbing/dwh/ods/shebaodb/20190312000057/cfg_shebao.txt [0]\ntextFile at
+                    StatApplyDetailDao.scala:240"];
+                    1 [label="webhdfs://jianbing/dwh/ods/shebaodb/20190312000057/cfg_shebao.txt [1]\ntextFile at
+                    StatApplyDetailDao.scala:240"];
+                    }
+                    subgraph cluster1 {
+                    label="filter";
+                    2 [label="MapPartitionsRDD [2]\nfilter at StatApplyDetailDao.scala:240"];
+                    }
+                    subgraph cluster2 {
+                    label="mapPartitions";
+                    3 [label="MapPartitionsRDD [3]\nmapPartitions at StatApplyDetailDao.scala:244"];
+                    }
+                    }
+                    0-&gt;1;
+                    1-&gt;2;
+                    2-&gt;3;
+                    }
+                </div>
+            </div>
+            <div class="stage-metadata" skipped="false" stage-id="29">
+                <div class="dot-file">digraph G {
+                    subgraph clusterstage_29 {
+                    label="Stage 29";
+                    subgraph cluster106 {
+                    label="leftOuterJoin";
+                    142 [label="CoGroupedRDD [142]\nleftOuterJoin at StatApplyDetailService.scala:477"];
+                    143 [label="MapPartitionsRDD [143]\nleftOuterJoin at StatApplyDetailService.scala:477"];
+                    144 [label="MapPartitionsRDD [144] [Cached]\nleftOuterJoin at StatApplyDetailService.scala:477"];
+                    }
+                    subgraph cluster107 {
+                    label="mapPartitions";
+                    145 [label="MapPartitionsRDD [145] [Cached]\nmapPartitions at StatApplyDetailService.scala:480"];
+                    }
+                    subgraph cluster108 {
+                    label="saveAsTextFile";
+                    146 [label="MapPartitionsRDD [146]\nsaveAsTextFile at StatApplyDetailController.scala:13"];
+                    }
+                    }
+                    142-&gt;143;
+                    143-&gt;144;
+                    144-&gt;145;
+                    145-&gt;146;
+                    }
+                </div>
+                <div class="incoming-edge">141,142</div>
+                <div class="incoming-edge">3,142</div>
+                <div class="cached-rdd">144</div>
+                <div class="cached-rdd">145</div>
+            </div>
+        </div>
+    </div>
+    <h4 id="active">Active Stages (1)</h4>
+    <div>
+        <table class="table table-bordered table-condensed table-striped table-head-clickable table-cell-width-limited"
+               id="activeStage-table">
+            <thead>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;activeStage.sort=Stage+Id&amp;activeStage.desc=false&amp;activeStage.pageSize=100#active">
+                    Stage Id<span>
+               ▾
+            </span>
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;activeStage.sort=Description&amp;activeStage.pageSize=100#active">
+                    Description
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;activeStage.sort=Submitted&amp;activeStage.pageSize=100#active">
+                    Submitted
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;activeStage.sort=Duration&amp;activeStage.pageSize=100#active">
+                    Duration
+                </a>
+            </th>
+            <th>
+                Tasks: Succeeded/Total
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;activeStage.sort=Input&amp;activeStage.pageSize=100#active">
+<span data-toggle="tooltip" title="Bytes and records read from Hadoop or from Spark storage.">
+              Input
+            </span>
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;activeStage.sort=Output&amp;activeStage.pageSize=100#active">
+<span data-toggle="tooltip" title="Bytes and records written to Hadoop.">
+              Output
+            </span>
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;activeStage.sort=Shuffle+Read&amp;activeStage.pageSize=100#active">
+<span data-toggle="tooltip" title="Total shuffle bytes and records read (includes both data read locally and data read from
+       remote executors). ">
+              Shuffle Read
+            </span>
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;activeStage.sort=Shuffle+Write&amp;activeStage.pageSize=100#active">
+<span data-placement="left" data-toggle="tooltip"
+      title="Bytes and records written to disk in order to be read by a shuffle in a future stage.">
+              Shuffle Write
+            </span>
+                </a>
+            </th>
+            </thead>
+            <tbody>
+            <tr id="stage-22-0">
+                <td>22</td>
+                <td>
+                    <div><a class="kill-link" href="/proxy/application_1557228347474_0004/stages/stage/kill/?id=22"
+                            onclick="if (window.confirm('Are you sure you want to kill stage 22 ?')) { this.parentNode.submit(); return true; } else { return false; }">(kill)</a>
+                        <a class="name-link"
+                           href="/proxy/application_1557228347474_0004/stages/stage?id=22&amp;attempt=0">filter at
+                            StatApplyDetailService.scala:336</a> <span class="expand-details"
+                                                                       onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+                            RDD: <a href="/proxy/application_1557228347474_0004/storage/rdd?id=106">MapPartitionsRDD</a><a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=103">MapPartitionsRDD</a><a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=105">UnionRDD</a><a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=99">MapPartitionsRDD</a><a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=104">MapPartitionsRDD</a><a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=102">MapPartitionsRDD</a>
+                            <pre>org.apache.spark.rdd.RDD.filter(RDD.scala:386)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:336)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:26:48
+                </td>
+                <td>55 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        282/402
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 70.1492537313433%"></div>
+                        <div class="bar bar-running" style="width: 4.975124378109453%"></div>
+                    </div>
+                </td>
+                <td>12.9 GB</td>
+                <td></td>
+                <td>223.2 MB</td>
+                <td>214.5 MB</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <h4 id="pending">Pending Stages (4)</h4>
+    <div>
+        <table class="table table-bordered table-condensed table-striped table-head-clickable table-cell-width-limited"
+               id="pendingStage-table">
+            <thead>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;pendingStage.sort=Stage+Id&amp;pendingStage.desc=false&amp;pendingStage.pageSize=100#skipped">
+                    Stage Id<span>
+               ▾
+            </span>
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;pendingStage.sort=Description&amp;pendingStage.pageSize=100#skipped">
+                    Description
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;pendingStage.sort=Submitted&amp;pendingStage.pageSize=100#skipped">
+                    Submitted
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;pendingStage.sort=Duration&amp;pendingStage.pageSize=100#skipped">
+                    Duration
+                </a>
+            </th>
+            <th>
+                Tasks: Succeeded/Total
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;pendingStage.sort=Input&amp;pendingStage.pageSize=100#skipped">
+<span data-toggle="tooltip" title="Bytes and records read from Hadoop or from Spark storage.">
+              Input
+            </span>
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;pendingStage.sort=Output&amp;pendingStage.pageSize=100#skipped">
+<span data-toggle="tooltip" title="Bytes and records written to Hadoop.">
+              Output
+            </span>
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;pendingStage.sort=Shuffle+Read&amp;pendingStage.pageSize=100#skipped">
+<span data-toggle="tooltip" title="Total shuffle bytes and records read (includes both data read locally and data read from
+       remote executors). ">
+              Shuffle Read
+            </span>
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;pendingStage.sort=Shuffle+Write&amp;pendingStage.pageSize=100#skipped">
+<span data-placement="left" data-toggle="tooltip"
+      title="Bytes and records written to disk in order to be read by a shuffle in a future stage.">
+              Shuffle Write
+            </span>
+                </a>
+            </th>
+            </thead>
+            <tbody>
+            <tr id="stage-29-0">
+                <td>29</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=29&amp;attempt=0">saveAsTextFile
+                        at StatApplyDetailController.scala:13</a> <span class="expand-details"
+                                                                        onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.saveAsTextFile(RDD.scala:1468)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:13)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    Unknown
+                </td>
+                <td>Unknown</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        0/201
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 0.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr id="stage-27-0">
+                <td>27</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=27&amp;attempt=0">union at
+                        StatApplyDetailService.scala:471</a> <span class="expand-details"
+                                                                   onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.union(RDD.scala:598)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:471)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    Unknown
+                </td>
+                <td>Unknown</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        0/1005
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 0.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr id="stage-26-0">
+                <td>26</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=26&amp;attempt=0">filter at
+                        StatApplyDetailService.scala:431</a> <span class="expand-details"
+                                                                   onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.filter(RDD.scala:386)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:431)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    Unknown
+                </td>
+                <td>Unknown</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        0/804
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 0.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr id="stage-24-0">
+                <td>24</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=24&amp;attempt=0">filter at
+                        StatApplyDetailService.scala:385</a> <span class="expand-details"
+                                                                   onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.filter(RDD.scala:386)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:385)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    Unknown
+                </td>
+                <td>Unknown</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        0/603
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 0.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <h4 id="completed">Completed Stages (24)</h4>
+    <div>
+        <table class="table table-bordered table-condensed table-striped table-head-clickable table-cell-width-limited"
+               id="completedStage-table">
+            <thead>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;completedStage.sort=Stage+Id&amp;completedStage.desc=false&amp;completedStage.pageSize=100#completed">
+                    Stage Id<span>
+               ▾
+            </span>
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;completedStage.sort=Description&amp;completedStage.pageSize=100#completed">
+                    Description
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;completedStage.sort=Submitted&amp;completedStage.pageSize=100#completed">
+                    Submitted
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;completedStage.sort=Duration&amp;completedStage.pageSize=100#completed">
+                    Duration
+                </a>
+            </th>
+            <th>
+                Tasks: Succeeded/Total
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;completedStage.sort=Input&amp;completedStage.pageSize=100#completed">
+<span data-toggle="tooltip" title="Bytes and records read from Hadoop or from Spark storage.">
+              Input
+            </span>
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;completedStage.sort=Output&amp;completedStage.pageSize=100#completed">
+<span data-toggle="tooltip" title="Bytes and records written to Hadoop.">
+              Output
+            </span>
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;completedStage.sort=Shuffle+Read&amp;completedStage.pageSize=100#completed">
+<span data-toggle="tooltip" title="Total shuffle bytes and records read (includes both data read locally and data read from
+       remote executors). ">
+              Shuffle Read
+            </span>
+                </a>
+            </th>
+            <th>
+                <a href="/proxy/application_1557228347474_0004/jobs/job/?id=1&amp;completedStage.sort=Shuffle+Write&amp;completedStage.pageSize=100#completed">
+<span data-placement="left" data-toggle="tooltip"
+      title="Bytes and records written to disk in order to be read by a shuffle in a future stage.">
+              Shuffle Write
+            </span>
+                </a>
+            </th>
+            </thead>
+            <tbody>
+            <tr id="stage-28-0">
+                <td>28</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=28&amp;attempt=0">mapPartitions
+                        at StatApplyDetailDao.scala:244</a> <span class="expand-details"
+                                                                  onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.dao.StatApplyDetailDao$.getCfgShebao(StatApplyDetailDao.scala:244)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:475)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:59
+                </td>
+                <td>0.4 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        2/2
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>1275.8 KB</td>
+                <td></td>
+                <td></td>
+                <td>22.8 KB</td>
+            </tr>
+            <tr id="stage-25-0">
+                <td>25</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=25&amp;attempt=0">mapPartitions
+                        at StatApplyDetailDao.scala:231</a> <span class="expand-details"
+                                                                  onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.dao.StatApplyDetailDao$.getCfgLocation(StatApplyDetailDao.scala:231)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:438)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:59
+                </td>
+                <td>0.6 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        2/2
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>496.1 KB</td>
+                <td></td>
+                <td></td>
+                <td>17.6 KB</td>
+            </tr>
+            <tr id="stage-23-0">
+                <td>23</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=23&amp;attempt=0">mapPartitions
+                        at StatApplyDetailDao.scala:218</a> <span class="expand-details"
+                                                                  onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.dao.StatApplyDetailDao$.getLoactionExtend(StatApplyDetailDao.scala:218)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:392)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:59
+                </td>
+                <td>0.6 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        2/2
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>373.7 KB</td>
+                <td></td>
+                <td></td>
+                <td>25.9 KB</td>
+            </tr>
+            <tr id="stage-21-0">
+                <td>21</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=21&amp;attempt=0">filter at
+                        StatApplyDetailService.scala:290</a> <span class="expand-details"
+                                                                   onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+                            RDD: <a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=98">MapPartitionsRDD</a><a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=96">MapPartitionsRDD</a><a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=97">MapPartitionsRDD</a>
+                            <pre>org.apache.spark.rdd.RDD.filter(RDD.scala:386)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:290)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:25:34
+                </td>
+                <td>1.2 min</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        201/201
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td>653.3 MB</td>
+                <td>348.6 MB</td>
+            </tr>
+            <tr id="stage-20-0">
+                <td>20</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=20&amp;attempt=0">mapPartitions
+                        at StatApplyDetailDao.scala:173</a> <span class="expand-details"
+                                                                  onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.dao.StatApplyDetailDao$.getCfgStatStatus(StatApplyDetailDao.scala:173)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:260)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:59
+                </td>
+                <td>0.8 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        2/2
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>48.3 KB</td>
+                <td></td>
+                <td></td>
+                <td>47.0 KB</td>
+            </tr>
+            <tr id="stage-19-0">
+                <td>19</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=19&amp;attempt=0">mapPartitions
+                        at StatApplyDetailDao.scala:192</a> <span class="expand-details"
+                                                                  onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.dao.StatApplyDetailDao$.getGjjBrief(StatApplyDetailDao.scala:192)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:288)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:59
+                </td>
+                <td>57 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        23/23
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>2.7 GB</td>
+                <td></td>
+                <td></td>
+                <td>163.0 MB</td>
+            </tr>
+            <tr id="stage-18-0">
+                <td>18</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=18&amp;attempt=0">mapPartitions
+                        at StatApplyDetailService.scala:229</a> <span class="expand-details"
+                                                                      onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+                            RDD: <a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=93">MapPartitionsRDD</a><a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=92">MapPartitionsRDD</a>
+                            <pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:229)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:24:40
+                </td>
+                <td>54 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        201/201
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td>711.2 MB</td>
+                <td>653.2 MB</td>
+            </tr>
+            <tr id="stage-17-0">
+                <td>17</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=17&amp;attempt=0">mapPartitions
+                        at StatApplyDetailService.scala:170</a> <span class="expand-details"
+                                                                      onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+                            RDD: <a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=76">MapPartitionsRDD</a><a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=75">MapPartitionsRDD</a>
+                            <pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyLoanInfo(StatApplyDetailService.scala:170)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:224)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:23:47
+                </td>
+                <td>53 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        201/201
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td>871.9 MB</td>
+                <td>710.1 MB</td>
+            </tr>
+            <tr id="stage-16-0">
+                <td>16</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=16&amp;attempt=0">mapPartitions
+                        at StatApplyDetailDao.scala:146</a> <span class="expand-details"
+                                                                  onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.dao.StatApplyDetailDao$.getStatApplyRevenue(StatApplyDetailDao.scala:146)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyLoanInfo(StatApplyDetailService.scala:165)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:224)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:59
+                </td>
+                <td>44 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        2/2
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>150.8 MB</td>
+                <td></td>
+                <td></td>
+                <td>30.2 MB</td>
+            </tr>
+            <tr id="stage-15-0">
+                <td>15</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=15&amp;attempt=0">mapPartitions
+                        at StatApplyDetailService.scala:144</a> <span class="expand-details"
+                                                                      onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+                            RDD: <a href="/proxy/application_1557228347474_0004/storage/rdd?id=71">MapPartitionsRDD</a>
+                            <pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getCertificationInfoForApply(StatApplyDetailService.scala:144)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyLoanInfo(StatApplyDetailService.scala:166)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:224)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:23:01
+                </td>
+                <td>46 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        201/201
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td>985.5 MB</td>
+                <td>841.6 MB</td>
+            </tr>
+            <tr id="stage-14-0">
+                <td>14</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=14&amp;attempt=0">union at
+                        StatApplyDetailService.scala:136</a> <span class="expand-details"
+                                                                   onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+                            RDD: <a href="/proxy/application_1557228347474_0004/storage/rdd?id=68">UnionRDD</a><a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=59">MapPartitionsRDD</a>
+                            <pre>org.apache.spark.rdd.RDD.union(RDD.scala:598)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getPpdInfoForAllApply(StatApplyDetailService.scala:136)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getCertificationInfoForApply(StatApplyDetailService.scala:140)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyLoanInfo(StatApplyDetailService.scala:166)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:224)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:22:09
+                </td>
+                <td>52 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        402/402
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>12.8 GB</td>
+                <td></td>
+                <td>14.6 MB</td>
+                <td>836.2 MB</td>
+            </tr>
+            <tr id="stage-13-0">
+                <td>13</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=13&amp;attempt=0">mapPartitions
+                        at StatApplyDetailDao.scala:131</a> <span class="expand-details"
+                                                                  onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+                            RDD: <a href="/proxy/application_1557228347474_0004/storage/rdd?id=19">MapPartitionsRDD</a>
+                            <pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.dao.StatApplyDetailDao$.getCfgCertification(StatApplyDetailDao.scala:131)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getCertificationInfoForApply(StatApplyDetailService.scala:139)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyLoanInfo(StatApplyDetailService.scala:166)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:224)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:58
+                </td>
+                <td>1.5 min</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        14/14
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>1682.0 MB</td>
+                <td></td>
+                <td></td>
+                <td>149.3 MB</td>
+            </tr>
+            <tr id="stage-12-0">
+                <td>12</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=12&amp;attempt=0">mapPartitions
+                        at StatApplyDetailDao.scala:116</a> <span class="expand-details"
+                                                                  onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.dao.StatApplyDetailDao$.getDiscardPPd(StatApplyDetailDao.scala:116)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getPpdInfoForAllApply(StatApplyDetailService.scala:115)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getCertificationInfoForApply(StatApplyDetailService.scala:140)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyLoanInfo(StatApplyDetailService.scala:166)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:224)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:59
+                </td>
+                <td>1 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        2/2
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>7.6 MB</td>
+                <td></td>
+                <td></td>
+                <td>2045.5 KB</td>
+            </tr>
+            <tr id="stage-11-0">
+                <td>11</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=11&amp;attempt=0">filter at
+                        StatApplyDetailService.scala:105</a> <span class="expand-details"
+                                                                   onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+                            RDD: <a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=58">MapPartitionsRDD</a><a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=57">MapPartitionsRDD</a>
+                            <pre>org.apache.spark.rdd.RDD.filter(RDD.scala:386)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getPpdInfoForAllApply(StatApplyDetailService.scala:105)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getCertificationInfoForApply(StatApplyDetailService.scala:140)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyLoanInfo(StatApplyDetailService.scala:166)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:224)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:21:38
+                </td>
+                <td>31 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        201/201
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td>877.5 MB</td>
+                <td>12.6 MB</td>
+            </tr>
+            <tr id="stage-10-0">
+                <td>10</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=10&amp;attempt=0">mapPartitions
+                        at StatApplyDetailService.scala:55</a> <span class="expand-details"
+                                                                     onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getApplyExtraInfo(StatApplyDetailService.scala:55)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjInfo(StatApplyDetailService.scala:85)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getPpdInfoForAllApply(StatApplyDetailService.scala:104)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getCertificationInfoForApply(StatApplyDetailService.scala:140)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyLoanInfo(StatApplyDetailService.scala:166)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:224)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:21:00
+                </td>
+                <td>37 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        201/201
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td>755.3 MB</td>
+                <td>830.5 MB</td>
+            </tr>
+            <tr id="stage-9-0">
+                <td>9</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=9&amp;attempt=0">mapPartitions
+                        at StatApplyDetailDao.scala:101</a> <span class="expand-details"
+                                                                  onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.dao.StatApplyDetailDao$.getHiddenBriefApply(StatApplyDetailDao.scala:101)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjInfo(StatApplyDetailService.scala:86)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getPpdInfoForAllApply(StatApplyDetailService.scala:104)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getCertificationInfoForApply(StatApplyDetailService.scala:140)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyLoanInfo(StatApplyDetailService.scala:166)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:224)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:59
+                </td>
+                <td>1.1 min</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        11/11
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>1269.7 MB</td>
+                <td></td>
+                <td></td>
+                <td>47.0 MB</td>
+            </tr>
+            <tr id="stage-8-0">
+                <td>8</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=8&amp;attempt=0">mapPartitions
+                        at StatApplyDetailService.scala:44</a> <span class="expand-details"
+                                                                     onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+                            RDD: <a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=37">MapPartitionsRDD</a><a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=44">MapPartitionsRDD</a><a
+                                href="/proxy/application_1557228347474_0004/storage/rdd?id=40">MapPartitionsRDD</a>
+                            <pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyExceptInsureAndBank(StatApplyDetailService.scala:44)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getApplyExtraInfo(StatApplyDetailService.scala:53)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjInfo(StatApplyDetailService.scala:85)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getPpdInfoForAllApply(StatApplyDetailService.scala:104)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getCertificationInfoForApply(StatApplyDetailService.scala:140)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyLoanInfo(StatApplyDetailService.scala:166)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:224)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:20:28
+                </td>
+                <td>30 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        211/211
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>1187.5 MB</td>
+                <td></td>
+                <td>259.6 MB</td>
+                <td>571.5 MB</td>
+            </tr>
+            <tr id="stage-7-0">
+                <td>7</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=7&amp;attempt=0">mapPartitions
+                        at StatApplyDetailDao.scala:85</a> <span class="expand-details"
+                                                                 onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.dao.StatApplyDetailDao$.getSysApplyInfo(StatApplyDetailDao.scala:85)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getApplyExtraInfo(StatApplyDetailService.scala:52)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjInfo(StatApplyDetailService.scala:85)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getPpdInfoForAllApply(StatApplyDetailService.scala:104)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getCertificationInfoForApply(StatApplyDetailService.scala:140)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyLoanInfo(StatApplyDetailService.scala:166)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:224)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:59
+                </td>
+                <td>16 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        174/174
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>513.9 MB</td>
+                <td></td>
+                <td></td>
+                <td>183.8 MB</td>
+            </tr>
+            <tr id="stage-6-0">
+                <td>6</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=6&amp;attempt=0">mapPartitions
+                        at StatApplyDetailDao.scala:60</a> <span class="expand-details"
+                                                                 onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.dao.StatApplyDetailDao$.getSysApplyDiscard(StatApplyDetailDao.scala:60)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApply(StatApplyDetailService.scala:15)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyExceptInsureAndBank(StatApplyDetailService.scala:33)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getApplyExtraInfo(StatApplyDetailService.scala:53)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjInfo(StatApplyDetailService.scala:85)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getPpdInfoForAllApply(StatApplyDetailService.scala:104)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getCertificationInfoForApply(StatApplyDetailService.scala:140)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyLoanInfo(StatApplyDetailService.scala:166)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:224)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:59
+                </td>
+                <td>12 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        6/6
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>651.5 MB</td>
+                <td></td>
+                <td></td>
+                <td>207.5 MB</td>
+            </tr>
+            <tr id="stage-5-0">
+                <td>5</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=5&amp;attempt=0">mapPartitions
+                        at StatApplyDetailDao.scala:74</a> <span class="expand-details"
+                                                                 onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+                            RDD: <a href="/proxy/application_1557228347474_0004/storage/rdd?id=30">MapPartitionsRDD</a>
+                            <pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.dao.StatApplyDetailDao$.getSysApplyForDiscard(StatApplyDetailDao.scala:74)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApply(StatApplyDetailService.scala:17)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyExceptInsureAndBank(StatApplyDetailService.scala:33)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getApplyExtraInfo(StatApplyDetailService.scala:53)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjInfo(StatApplyDetailService.scala:85)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getPpdInfoForAllApply(StatApplyDetailService.scala:104)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getCertificationInfoForApply(StatApplyDetailService.scala:140)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyLoanInfo(StatApplyDetailService.scala:166)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:224)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:59
+                </td>
+                <td>22 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        10/10
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>1187.5 MB</td>
+                <td></td>
+                <td></td>
+                <td>52.1 MB</td>
+            </tr>
+            <tr id="stage-4-0">
+                <td>4</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=4&amp;attempt=0">mapPartitions
+                        at StatApplyDetailService.scala:211</a> <span class="expand-details"
+                                                                      onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+                            RDD: <a href="/proxy/application_1557228347474_0004/storage/rdd?id=89">MapPartitionsRDD</a>
+                            <pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanWallent(StatApplyDetailService.scala:211)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:225)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:20:09
+                </td>
+                <td>6 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        201/201
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td>952.9 KB</td>
+                <td>1125.9 KB</td>
+            </tr>
+            <tr id="stage-3-0">
+                <td>3</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=3&amp;attempt=0">groupBy at
+                        StatApplyDetailService.scala:209</a> <span class="expand-details"
+                                                                   onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.groupBy(RDD.scala:687)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanWallent(StatApplyDetailService.scala:209)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:225)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:20:02
+                </td>
+                <td>3 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        2/2
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td>949.7 KB</td>
+                <td>952.9 KB</td>
+            </tr>
+            <tr id="stage-2-0">
+                <td>2</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=2&amp;attempt=0">sortBy at
+                        StatApplyDetailService.scala:205</a> <span class="expand-details"
+                                                                   onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.sortBy(RDD.scala:617)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanWallent(StatApplyDetailService.scala:205)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getStandardLoanTimeStatus(StatApplyDetailService.scala:225)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyStateInfo(StatApplyDetailService.scala:261)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyGjjDetailInfo(StatApplyDetailService.scala:289)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:335)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:58
+                </td>
+                <td>3 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        2/2
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>37.2 MB</td>
+                <td></td>
+                <td></td>
+                <td>949.7 KB</td>
+            </tr>
+            <tr id="stage-1-0">
+                <td>1</td>
+                <td>
+                    <div><a class="name-link"
+                            href="/proxy/application_1557228347474_0004/stages/stage?id=1&amp;attempt=0">mapPartitions
+                        at StatApplyDetailDao.scala:206</a> <span class="expand-details"
+                                                                  onclick="this.parentNode.querySelector('.stage-details').classList.toggle('collapsed')">
+        +details
+      </span>
+                        <div class="stage-details collapsed">
+<pre>org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:793)
+com.jianbing.da.dwo.dao.StatApplyDetailDao$.getShebaoSurname(StatApplyDetailDao.scala:206)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyShebaoDeatilInfo(StatApplyDetailService.scala:343)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjLocation(StatApplyDetailService.scala:384)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForGjjCityLocation(StatApplyDetailService.scala:430)
+com.jianbing.da.dwo.service.StatApplyDetailService$.getAllApplyForShebaoCityLocation(StatApplyDetailService.scala:476)
+com.jianbing.da.dwo.controller.StatApplyDetailController$.main(StatApplyDetailController.scala:12)
+com.jianbing.da.dwo.controller.StatApplyDetailController.main(StatApplyDetailController.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:635)</pre>
+                        </div>
+                    </div>
+                </td>
+                <td valign="middle">
+                    2019/05/07 20:19:58
+                </td>
+                <td>34 s</td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        2/2
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+                <td>185.8 MB</td>
+                <td></td>
+                <td></td>
+                <td>10.4 MB</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

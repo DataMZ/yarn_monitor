@@ -1,0 +1,8 @@
+log_root_path: D:/yarnmonitor/log
+yarn_host_name: http://*:8088
+interval_time: 1 # unit:s
+retry_time: 3 # separator is "," below
+completed_job_fields: "Job Id,Description,Submitted,Duration,Stages: Succeeded/Total,Tasks (for all stages): Succeeded/Total"
+completed_stage_fields: "Stage Id,Pool Name,Description,Submitted,Duration,Tasks: Succeeded/Total,Input,Output,Shuffle Read,Shuffle Write"
+completed_detail_stage_fields: "Index,ID,Attempt,Status,Locality Level,Executor ID / Host,Launch Time,Duration,GC Time,Shuffle Read Size / Records,Write Time,Shuffle Write Size / Records,Shuffle Spill (Memory),Shuffle Spill (Disk),Errors"
+error_detail_stage_fields: "Index,ID,Attempt,Status,Locality Level,Executor ID / Host,Launch Time,Duration,GC Time,Shuffle Read Size / Records,Write Time,Shuffle Write Size / Records,Shuffle Spill (Memory),Shuffle Spill (Disk),Errors"

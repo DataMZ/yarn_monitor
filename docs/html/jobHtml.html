@@ -1,0 +1,477 @@
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-type"/>
+    <link href="/proxy/application_1557054450073_0117/static/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/proxy/application_1557054450073_0117/static/vis.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/proxy/application_1557054450073_0117/static/webui.css" rel="stylesheet" type="text/css"/>
+    <link href="/proxy/application_1557054450073_0117/static/timeline-view.css" rel="stylesheet" type="text/css"/>
+    <script src="/proxy/application_1557054450073_0117/static/sorttable.js"></script>
+    <script src="/proxy/application_1557054450073_0117/static/jquery-1.11.1.min.js"></script>
+    <script src="/proxy/application_1557054450073_0117/static/vis.min.js"></script>
+    <script src="/proxy/application_1557054450073_0117/static/bootstrap-tooltip.js"></script>
+    <script src="/proxy/application_1557054450073_0117/static/initialize-tooltips.js"></script>
+    <script src="/proxy/application_1557054450073_0117/static/table.js"></script>
+    <script src="/proxy/application_1557054450073_0117/static/additional-metrics.js"></script>
+    <script src="/proxy/application_1557054450073_0117/static/timeline-view.js"></script>
+    <script src="/proxy/application_1557054450073_0117/static/log-view.js"></script>
+    <script src="/proxy/application_1557054450073_0117/static/webui.js"></script>
+    <script>setUIRoot('/proxy/application_1557054450073_0117')</script>
+    <title>GjjAccountTagMain - Spark Jobs</title>
+</head>
+<body>
+<div class="navbar navbar-static-top">
+    <div class="navbar-inner">
+        <div class="brand">
+            <a class="brand" href="/proxy/application_1557054450073_0117/">
+                <img src="/proxy/application_1557054450073_0117/static/spark-logo-77x50px-hd.png"/>
+                <span class="version">2.2.0</span>
+            </a>
+        </div>
+        <p class="navbar-text pull-right">
+            <strong title="GjjAccountTagMain">GjjAccountTagMain</strong> application UI
+        </p>
+        <ul class="nav">
+            <li class="active">
+                <a href="/proxy/application_1557054450073_0117/jobs/">Jobs</a>
+            </li>
+            <li class="">
+                <a href="/proxy/application_1557054450073_0117/stages/">Stages</a>
+            </li>
+            <li class="">
+                <a href="/proxy/application_1557054450073_0117/storage/">Storage</a>
+            </li>
+            <li class="">
+                <a href="/proxy/application_1557054450073_0117/environment/">Environment</a>
+            </li>
+            <li class="">
+                <a href="/proxy/application_1557054450073_0117/executors/">Executors</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 style="vertical-align: bottom; display: inline-block;">
+                Spark Jobs
+                <sup>
+                    (<a data-placement="bottom" data-toggle="tooltip"
+                        title="A job is triggered by an action, like count() or saveAsTextFile(). Click on a job to see information about the stages of tasks inside it.">?</a>)
+                </sup>
+            </h3>
+        </div>
+    </div>
+    <div>
+        <ul class="unstyled">
+            <li>
+                <strong>User:</strong>
+                root
+            </li>
+            <li>
+                <strong>Total Uptime:</strong>
+                5.7 min
+            </li>
+            <li>
+                <strong>Scheduling Mode: </strong>
+                FIFO
+            </li>
+            <li>
+                <a href="#active"><strong>Active Jobs:</strong></a>
+                1
+            </li>
+            <li id="completed-summary">
+                <a href="#completed"><strong>Completed Jobs:</strong></a>
+                4
+            </li>
+        </ul>
+    </div>
+    <span class="expand-application-timeline">
+<span class="expand-application-timeline-arrow arrow-closed"></span>
+<a data-placement="right" data-toggle="tooltip" title="Shows when jobs started and ended and when executors joined or left. Drag to scroll.
+       Click Enable Zooming and use mouse wheel to zoom in/out.">
+        Event Timeline
+      </a>
+</span>
+    <div class="collapsed" id="application-timeline">
+        <div class="control-panel">
+            <div id="application-timeline-zoom-lock">
+                <input type="checkbox"/>
+                <span>Enable zooming</span>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        drawApplicationTimeline(
+            [
+                {
+                    'id': 'executors',
+                    'content': '<div>Executors</div><div class="legend-area"><svg width="150px" height="55px">      <rect class="executor-added-legend" x="5px" y="5px" width="20px" height="15px" rx="2px" ry="2px"></rect>      <text x="35px" y="17px">Added</text>      <rect class="executor-removed-legend" x="5px" y="30px" width="20px" height="15px" rx="2px" ry="2px"></rect>      <text x="35px" y="42px">Removed</text>    </svg></div>',
+                },
+                {
+                    'id': 'jobs',
+                    'content': '<div>Jobs</div><div class="legend-area"><svg width="150px" height="85px">      <rect class="succeeded-job-legend" x="5px" y="5px" width="20px" height="15px" rx="2px" ry="2px"></rect>      <text x="35px" y="17px">Succeeded</text>      <rect class="failed-job-legend" x="5px" y="30px" width="20px" height="15px" rx="2px" ry="2px"></rect>      <text x="35px" y="42px">Failed</text>      <rect class="running-job-legend" x="5px" y="55px" width="20px" height="15px" rx="2px" ry="2px"></rect>      <text x="35px" y="67px">Running</text>    </svg></div>',
+                }
+            ]
+            , [
+                {
+                    'className': 'job application-timeline-object running',
+                    'group': 'jobs',
+                    'start': new Date(1557206936019),
+                    'end': new Date(1557207001856),
+                    'content': '<div class="application-timeline-content"' +
+                        'data-html="true" data-placement="top" data-toggle="tooltip"' +
+                        'data-title="sortBy at GjjAccountTag.scala:157 (Job 4)<br>' +
+                        'Status: RUNNING<br>' +
+                        'Submitted: 2019/05/07 13:28:56' +
+                        '">' +
+                        'sortBy at GjjAccountTag.scala:157 (Job 4)</div>'
+                }
+                ,
+                {
+                    'className': 'job application-timeline-object succeeded',
+                    'group': 'jobs',
+                    'start': new Date(1557206880368),
+                    'end': new Date(1557206935848),
+                    'content': '<div class="application-timeline-content"' +
+                        'data-html="true" data-placement="top" data-toggle="tooltip"' +
+                        'data-title="sortBy at GjjAccountTag.scala:69 (Job 3)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 13:28:00' +
+                        '<br>Completed: 2019/05/07 13:28:55">' +
+                        'sortBy at GjjAccountTag.scala:69 (Job 3)</div>'
+                }
+                ,
+                {
+                    'className': 'job application-timeline-object succeeded',
+                    'group': 'jobs',
+                    'start': new Date(1557206821268),
+                    'end': new Date(1557206880266),
+                    'content': '<div class="application-timeline-content"' +
+                        'data-html="true" data-placement="top" data-toggle="tooltip"' +
+                        'data-title="sortBy at GjjAccountTag.scala:69 (Job 2)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 13:27:01' +
+                        '<br>Completed: 2019/05/07 13:28:00">' +
+                        'sortBy at GjjAccountTag.scala:69 (Job 2)</div>'
+                }
+                ,
+                {
+                    'className': 'job application-timeline-object succeeded',
+                    'group': 'jobs',
+                    'start': new Date(1557206750161),
+                    'end': new Date(1557206821103),
+                    'content': '<div class="application-timeline-content"' +
+                        'data-html="true" data-placement="top" data-toggle="tooltip"' +
+                        'data-title="sortBy at GjjAccountTag.scala:69 (Job 1)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 13:25:50' +
+                        '<br>Completed: 2019/05/07 13:27:01">' +
+                        'sortBy at GjjAccountTag.scala:69 (Job 1)</div>'
+                }
+                ,
+                {
+                    'className': 'job application-timeline-object succeeded',
+                    'group': 'jobs',
+                    'start': new Date(1557206669524),
+                    'end': new Date(1557206750014),
+                    'content': '<div class="application-timeline-content"' +
+                        'data-html="true" data-placement="top" data-toggle="tooltip"' +
+                        'data-title="sortBy at GjjAccountTag.scala:69 (Job 0)<br>' +
+                        'Status: SUCCEEDED<br>' +
+                        'Submitted: 2019/05/07 13:24:29' +
+                        '<br>Completed: 2019/05/07 13:25:50">' +
+                        'sortBy at GjjAccountTag.scala:69 (Job 0)</div>'
+                }
+                ,
+                {
+                    'className': 'executor added',
+                    'group': 'executors',
+                    'start': new Date(1557206663480),
+                    'content': '<div class="executor-event-content"' +
+                        'data-toggle="tooltip" data-placement="bottom"' +
+                        'data-title="Executor 1<br>' +
+                        'Added at 2019/05/07 13:24:23"' +
+                        'data-html="true">Executor 1 added</div>'
+                }
+                ,
+                {
+                    'className': 'executor added',
+                    'group': 'executors',
+                    'start': new Date(1557206666380),
+                    'content': '<div class="executor-event-content"' +
+                        'data-toggle="tooltip" data-placement="bottom"' +
+                        'data-title="Executor 4<br>' +
+                        'Added at 2019/05/07 13:24:26"' +
+                        'data-html="true">Executor 4 added</div>'
+                }
+                ,
+                {
+                    'className': 'executor added',
+                    'group': 'executors',
+                    'start': new Date(1557206666729),
+                    'content': '<div class="executor-event-content"' +
+                        'data-toggle="tooltip" data-placement="bottom"' +
+                        'data-title="Executor 3<br>' +
+                        'Added at 2019/05/07 13:24:26"' +
+                        'data-html="true">Executor 3 added</div>'
+                }
+                ,
+                {
+                    'className': 'executor added',
+                    'group': 'executors',
+                    'start': new Date(1557206667594),
+                    'content': '<div class="executor-event-content"' +
+                        'data-toggle="tooltip" data-placement="bottom"' +
+                        'data-title="Executor 5<br>' +
+                        'Added at 2019/05/07 13:24:27"' +
+                        'data-html="true">Executor 5 added</div>'
+                }
+                ,
+                {
+                    'className': 'executor added',
+                    'group': 'executors',
+                    'start': new Date(1557206674455),
+                    'content': '<div class="executor-event-content"' +
+                        'data-toggle="tooltip" data-placement="bottom"' +
+                        'data-title="Executor 2<br>' +
+                        'Added at 2019/05/07 13:24:34"' +
+                        'data-html="true">Executor 2 added</div>'
+                }
+            ], 1557206658901, 480);
+    </script>
+    <h4 id="active">Active Jobs (1)</h4>
+    <div>
+        <table class="table table-bordered table-condensed table-striped table-head-clickable table-cell-width-limited"
+               id="activeJob-table">
+            <thead>
+            <th class="">
+                <a href="/proxy/application_1557054450073_0117/jobs/?&amp;activeJob.sort=Job+Id&amp;activeJob.desc=false&amp;activeJob.pageSize=100#active">
+                    Job Id<span>
+               ▾
+            </span>
+                </a>
+            </th>
+            <th class="">
+                <a href="/proxy/application_1557054450073_0117/jobs/?&amp;activeJob.sort=Description&amp;activeJob.pageSize=100#active">
+                    Description
+                </a>
+            </th>
+            <th class="">
+                <a href="/proxy/application_1557054450073_0117/jobs/?&amp;activeJob.sort=Submitted&amp;activeJob.pageSize=100#active">
+                    Submitted
+                </a>
+            </th>
+            <th class="">
+                <a href="/proxy/application_1557054450073_0117/jobs/?&amp;activeJob.sort=Duration&amp;activeJob.pageSize=100#active">
+                    Duration
+                </a>
+            </th>
+            <th class="">
+                Stages: Succeeded/Total
+            </th>
+            <th class="">
+                Tasks (for all stages): Succeeded/Total
+            </th>
+            </thead>
+            <tbody>
+            <tr id="job-4">
+                <td>
+                    4
+                </td>
+                <td>
+                    <span class="description-input"></span> <a class="kill-link"
+                                                               href="/proxy/application_1557054450073_0117/jobs/job/kill/?id=4"
+                                                               onclick="if (window.confirm('Are you sure you want to kill job 4 ?')) { this.parentNode.submit(); return true; } else { return false; }">(kill)</a>
+                    <a class="name-link" href="/proxy/application_1557054450073_0117/jobs/job?id=4">sortBy at
+                        GjjAccountTag.scala:157</a>
+                </td>
+                <td>
+                    2019/05/07 13:28:56
+                </td>
+                <td>1.1 min</td>
+                <td class="stage-progress-cell">
+                    11/17
+
+
+                </td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        724/918
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 78.86710239651417%"></div>
+                        <div class="bar bar-running" style="width: 2.178649237472767%"></div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <h4 id="completed">Completed Jobs (4)</h4>
+    <div>
+        <table class="table table-bordered table-condensed table-striped table-head-clickable table-cell-width-limited"
+               id="completedJob-table">
+            <thead>
+            <th class="">
+                <a href="/proxy/application_1557054450073_0117/jobs/?&amp;completedJob.sort=Job+Id&amp;completedJob.desc=false&amp;completedJob.pageSize=100#completed">
+                    Job Id<span>
+               ▾
+            </span>
+                </a>
+            </th>
+            <th class="">
+                <a href="/proxy/application_1557054450073_0117/jobs/?&amp;completedJob.sort=Description&amp;completedJob.pageSize=100#completed">
+                    Description
+                </a>
+            </th>
+            <th class="">
+                <a href="/proxy/application_1557054450073_0117/jobs/?&amp;completedJob.sort=Submitted&amp;completedJob.pageSize=100#completed">
+                    Submitted
+                </a>
+            </th>
+            <th class="">
+                <a href="/proxy/application_1557054450073_0117/jobs/?&amp;completedJob.sort=Duration&amp;completedJob.pageSize=100#completed">
+                    Duration
+                </a>
+            </th>
+            <th class="">
+                Stages: Succeeded/Total
+            </th>
+            <th class="">
+                Tasks (for all stages): Succeeded/Total
+            </th>
+            </thead>
+            <tbody>
+            <tr id="job-3">
+                <td>
+                    3
+                </td>
+                <td>
+                    <span class="description-input"></span>
+                    <a class="name-link" href="/proxy/application_1557054450073_0117/jobs/job?id=3">sortBy at
+                        GjjAccountTag.scala:69</a>
+                </td>
+                <td>
+                    2019/05/07 13:28:00
+                </td>
+                <td>55 s</td>
+                <td class="stage-progress-cell">
+                    3/3
+
+
+                </td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        116/116
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr id="job-2">
+                <td>
+                    2
+                </td>
+                <td>
+                    <span class="description-input"></span>
+                    <a class="name-link" href="/proxy/application_1557054450073_0117/jobs/job?id=2">sortBy at
+                        GjjAccountTag.scala:69</a>
+                </td>
+                <td>
+                    2019/05/07 13:27:01
+                </td>
+                <td>59 s</td>
+                <td class="stage-progress-cell">
+                    3/3
+
+
+                </td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        116/116
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr id="job-1">
+                <td>
+                    1
+                </td>
+                <td>
+                    <span class="description-input"></span>
+                    <a class="name-link" href="/proxy/application_1557054450073_0117/jobs/job?id=1">sortBy at
+                        GjjAccountTag.scala:69</a>
+                </td>
+                <td>
+                    2019/05/07 13:25:50
+                </td>
+                <td>1.2 min</td>
+                <td class="stage-progress-cell">
+                    3/3
+
+
+                </td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        116/116
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr id="job-0">
+                <td>
+                    0
+                </td>
+                <td>
+                    <span class="description-input"></span>
+                    <a class="name-link" href="/proxy/application_1557054450073_0117/jobs/job?id=0">sortBy at
+                        GjjAccountTag.scala:69</a>
+                </td>
+                <td>
+                    2019/05/07 13:24:29
+                </td>
+                <td>1.3 min</td>
+                <td class="stage-progress-cell">
+                    3/3
+
+
+                </td>
+                <td class="progress-cell">
+                    <div class="progress">
+<span style="text-align:center; position:absolute; width:100%; left:0;">
+        116/116
+
+
+
+      </span>
+                        <div class="bar bar-completed" style="width: 100.0%"></div>
+                        <div class="bar bar-running" style="width: 0.0%"></div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
