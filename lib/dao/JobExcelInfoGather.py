@@ -18,7 +18,7 @@ class JobExcelInfoGather:
     def __init__(self, applicationID, yml):
         """
         初始化基础信息
-        :param hostName: yarn的host_name,比如http://gaaiac:8088
+        :param hostName: yarn的host_name,比如http://*:8088
         :param applicationID: yarn的Job ID
         :param retryTime: 重新请求次数
         """
